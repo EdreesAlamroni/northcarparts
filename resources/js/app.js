@@ -61,4 +61,41 @@ document.addEventListener('alpine:init', () => {
             }
         }
     }))
+
+    Alpine.data('autoGenerateSlug', () => ({
+        slugManuallyEdited: false,
+
+        init() {
+            const { code: codeInput, slug: slugInput } = this.$refs
+
+            if (! codeInput || ! slugInput) {
+                return
+            }
+
+            if (slugInput.value !== '' && slugInput.value !== this.slugify(codeInput.value)) {
+                this.slugManuallyEdited = true
+            }
+
+            codeInput.addEventListener('input', () => {
+                if (! this.slugManuallyEdited) {
+                    slugInput.value = this.slugify(codeInput.value)
+                }
+            })
+
+            slugInput.addEventListener('input', () => {
+                this.slugManuallyEdited = true
+            })
+        },
+
+        slugify(value) {
+            return value
+                .toString()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '')
+        },
+    }))
 });

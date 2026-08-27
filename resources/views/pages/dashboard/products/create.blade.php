@@ -18,7 +18,7 @@
         <x-validation-errors :errors="$errors" />
 
         <section>
-            <form action="{{ route('dashboard.products.store') }}" method="POST" enctype="multipart/form-data" class="non-wire">
+            <form action="{{ route('dashboard.products.store') }}" method="POST" enctype="multipart/form-data" class="non-wire" x-data="autoGenerateSlug()">
                 @csrf
 
                 <x-card>
@@ -35,13 +35,13 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <flux:field>
                                 <flux:label @class(['text-red-600' => $errors->has('code')]) for="code" badge="*" required>{{ __('الكود') }}</flux:label>
-                                <flux:input type="text" id="code" name="code" :value="old('code')" autocomplete="off" lang="en" required />
+                                <flux:input type="text" id="code" name="code" x-ref="code" :value="old('code')" autocomplete="off" lang="en" required />
                                 <flux:error name="code" />
                             </flux:field>
 
                             <flux:field>
                                 <flux:label @class(['text-red-600' => $errors->has('slug')]) for="slug" badge="*" required>{{ __('الرابط (Slug)') }}</flux:label>
-                                <flux:input type="text" id="slug" name="slug" :value="old('slug')" autocomplete="off" lang="en" required />
+                                <flux:input type="text" id="slug" name="slug" x-ref="slug" :value="old('slug')" class="font-mono" autocomplete="off" lang="en" required />
                                 <flux:error name="slug" />
                             </flux:field>
 
