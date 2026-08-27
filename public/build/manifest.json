@@ -1,0 +1,109 @@
+{
+  "resources/assets/fonts/SomarSans-Black.woff2": {
+    "file": "assets/SomarSans-Black-QqrsSPwN.woff2",
+    "src": "resources/assets/fonts/SomarSans-Black.woff2"
+  },
+  "resources/assets/fonts/SomarSans-BlackItalic.woff2": {
+    "file": "assets/SomarSans-BlackItalic-Hy4meMu9.woff2",
+    "src": "resources/assets/fonts/SomarSans-BlackItalic.woff2"
+  },
+  "resources/assets/fonts/SomarSans-Bold.woff2": {
+    "file": "assets/SomarSans-Bold-CNQvMu62.woff2",
+    "src": "resources/assets/fonts/SomarSans-Bold.woff2"
+  },
+  "resources/assets/fonts/SomarSans-BoldItalic.woff2": {
+    "file": "assets/SomarSans-BoldItalic-C0xoL4Ty.woff2",
+    "src": "resources/assets/fonts/SomarSans-BoldItalic.woff2"
+  },
+  "resources/assets/fonts/SomarSans-ExtraBold.woff2": {
+    "file": "assets/SomarSans-ExtraBold-CjLXsUuc.woff2",
+    "src": "resources/assets/fonts/SomarSans-ExtraBold.woff2"
+  },
+  "resources/assets/fonts/SomarSans-ExtraBoldItalic.woff2": {
+    "file": "assets/SomarSans-ExtraBoldItalic-Dq3jmDuX.woff2",
+    "src": "resources/assets/fonts/SomarSans-ExtraBoldItalic.woff2"
+  },
+  "resources/assets/fonts/SomarSans-ExtraLight.woff2": {
+    "file": "assets/SomarSans-ExtraLight-dpjd1QkR.woff2",
+    "src": "resources/assets/fonts/SomarSans-ExtraLight.woff2"
+  },
+  "resources/assets/fonts/SomarSans-ExtraLightItalic.woff2": {
+    "file": "assets/SomarSans-ExtraLightItalic-BcqEjUJo.woff2",
+    "src": "resources/assets/fonts/SomarSans-ExtraLightItalic.woff2"
+  },
+  "resources/assets/fonts/SomarSans-Light.woff2": {
+    "file": "assets/SomarSans-Light-Br0otWjO.woff2",
+    "src": "resources/assets/fonts/SomarSans-Light.woff2"
+  },
+  "resources/assets/fonts/SomarSans-LightItalic.woff2": {
+    "file": "assets/SomarSans-LightItalic-K0raN0_N.woff2",
+    "src": "resources/assets/fonts/SomarSans-LightItalic.woff2"
+  },
+  "resources/assets/fonts/SomarSans-Medium.woff2": {
+    "file": "assets/SomarSans-Medium-BoBU_YbP.woff2",
+    "src": "resources/assets/fonts/SomarSans-Medium.woff2"
+  },
+  "resources/assets/fonts/SomarSans-MediumItalic.woff2": {
+    "file": "assets/SomarSans-MediumItalic-DRoGhA2P.woff2",
+    "src": "resources/assets/fonts/SomarSans-MediumItalic.woff2"
+  },
+  "resources/assets/fonts/SomarSans-Regular.woff2": {
+    "file": "assets/SomarSans-Regular-D2VLFpHH.woff2",
+    "src": "resources/assets/fonts/SomarSans-Regular.woff2"
+  },
+  "resources/assets/fonts/SomarSans-RegularItalic.woff2": {
+    "file": "assets/SomarSans-RegularItalic-DI0jUhEV.woff2",
+    "src": "resources/assets/fonts/SomarSans-RegularItalic.woff2"
+  },
+  "resources/assets/fonts/SomarSans-SemiBold.woff2": {
+    "file": "assets/SomarSans-SemiBold-ThMUb37J.woff2",
+    "src": "resources/assets/fonts/SomarSans-SemiBold.woff2"
+  },
+  "resources/assets/fonts/SomarSans-SemiBoldItalic.woff2": {
+    "file": "assets/SomarSans-SemiBoldItalic-z1XbCEJ-.woff2",
+    "src": "resources/assets/fonts/SomarSans-SemiBoldItalic.woff2"
+  },
+  "resources/assets/fonts/SomarSans-Thin.woff2": {
+    "file": "assets/SomarSans-Thin-CVggq2nz.woff2",
+    "src": "resources/assets/fonts/SomarSans-Thin.woff2"
+  },
+  "resources/assets/fonts/SomarSans-ThinItalic.woff2": {
+    "file": "assets/SomarSans-ThinItalic-D2X7x7MQ.woff2",
+    "src": "resources/assets/fonts/SomarSans-ThinItalic.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-D2LPSi3C.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "assets": [
+      "assets/SomarSans-Thin-CVggq2nz.woff2",
+      "assets/SomarSans-ThinItalic-D2X7x7MQ.woff2",
+      "assets/SomarSans-ExtraLight-dpjd1QkR.woff2",
+      "assets/SomarSans-ExtraLightItalic-BcqEjUJo.woff2",
+      "assets/SomarSans-Light-Br0otWjO.woff2",
+      "assets/SomarSans-LightItalic-K0raN0_N.woff2",
+      "assets/SomarSans-Regular-D2VLFpHH.woff2",
+      "assets/SomarSans-RegularItalic-DI0jUhEV.woff2",
+      "assets/SomarSans-Medium-BoBU_YbP.woff2",
+      "assets/SomarSans-MediumItalic-DRoGhA2P.woff2",
+      "assets/SomarSans-SemiBold-ThMUb37J.woff2",
+      "assets/SomarSans-SemiBoldItalic-z1XbCEJ-.woff2",
+      "assets/SomarSans-Bold-CNQvMu62.woff2",
+      "assets/SomarSans-BoldItalic-C0xoL4Ty.woff2",
+      "assets/SomarSans-ExtraBold-CjLXsUuc.woff2",
+      "assets/SomarSans-ExtraBoldItalic-Dq3jmDuX.woff2",
+      "assets/SomarSans-Black-QqrsSPwN.woff2",
+      "assets/SomarSans-BlackItalic-Hy4meMu9.woff2"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CrO-fPxc.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
