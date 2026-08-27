@@ -3,15 +3,12 @@
 namespace App\Http\Requests\Dashboard;
 
 use App\Concerns\ImageValidationRules;
-use App\Enums\FilterType;
 use App\Http\Requests\Dashboard\Concerns\ValidatesProductSpecifications;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Product;
-use App\ModelStates\Product\ProductState;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Spatie\ModelStates\Validation\ValidStateRule;
 
 class StoreProductRequest extends FormRequest
 {
@@ -26,14 +23,6 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => [
-                'required',
-                Rule::exists(Category::class, 'id'),
-            ],
-            'oem_manufacturer_id' => [
-                'required',
-                Rule::exists(Manufacturer::class, 'id'),
-            ],
             'code' => [
                 'required',
                 'string',
@@ -46,34 +35,18 @@ class StoreProductRequest extends FormRequest
                 'max:255',
                 Rule::unique(Product::class, 'slug'),
             ],
-            'name' => [
+            'category_id' => [
                 'required',
-                'string',
-                'max:255',
+                Rule::exists(Category::class, 'id'),
             ],
-            'filter_type' => [
+            'oem_manufacturer_id' => [
                 'required',
-                Rule::enum(FilterType::class),
+                Rule::exists(Manufacturer::class, 'id'),
             ],
             'oem_number' => [
                 'required',
                 'string',
                 'max:255',
-            ],
-            'qr_code_redirect_url' => [
-                'required',
-                'url',
-                'regex:/^https?:\/\//i',
-                'max:255',
-                Rule::unique(Product::class, 'qr_code_redirect_url'),
-            ],
-            'sort_order' => [
-                'required',
-                'integer',
-                'min:0',
-            ],
-            'state' => [
-                new ValidStateRule(ProductState::class),
             ],
             ...$this->specificationRules(),
             'image' => $this->imageRules(),

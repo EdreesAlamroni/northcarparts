@@ -40,16 +40,11 @@
                             </flux:field>
 
                             <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('slug')]) for="slug" badge="*" required>{{ __('الرابط') }}</flux:label>
+                                <flux:label @class(['text-red-600' => $errors->has('slug')]) for="slug" badge="*" required>{{ __('الرابط (Slug)') }}</flux:label>
                                 <flux:input type="text" id="slug" name="slug" :value="old('slug')" autocomplete="off" lang="en" required />
                                 <flux:error name="slug" />
                             </flux:field>
 
-                            <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('name')]) for="name" badge="*" required>{{ __('الاسم') }}</flux:label>
-                                <flux:input type="text" id="name" name="name" :value="old('name')" autocomplete="off" required />
-                                <flux:error name="name" />
-                            </flux:field>
                             <flux:field>
                                 <flux:label @class(['text-red-600' => $errors->has('category_id')]) for="category_id" badge="*" required>{{ __('التصنيف') }}</flux:label>
                                 <flux:select name="category_id" id="category_id" :placeholder="__('اختر التصنيف')">
@@ -78,42 +73,6 @@
                                 <flux:label @class(['text-red-600' => $errors->has('oem_number')]) for="oem_number" badge="*" required>{{ __('رقم OEM') }}</flux:label>
                                 <flux:input type="text" id="oem_number" name="oem_number" :value="old('oem_number')" autocomplete="off" lang="en" required />
                                 <flux:error name="oem_number" />
-                            </flux:field>
-
-                            <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('filter_type')]) for="filter_type" badge="*" required>{{ __('نوع الفلتر') }}</flux:label>
-                                <flux:select name="filter_type" id="filter_type" :placeholder="__('اختر نوع الفلتر')">
-                                    @foreach ($filterTypes as $type)
-                                        <flux:select.option :value="$type->id" :selected="old('filter_type') === $type->id">
-                                            {{ $type->name }}
-                                        </flux:select.option>
-                                    @endforeach
-                                </flux:select>
-                                <flux:error name="filter_type" />
-                            </flux:field>
-
-                            <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('qr_code_redirect_url')]) for="qr_code_redirect_url" badge="*" required>{{ __('رابط الـ QR Code') }}</flux:label>
-                                <flux:input type="url" id="qr_code_redirect_url" name="qr_code_redirect_url" :value="old('qr_code_redirect_url')" autocomplete="off" lang="en" required />
-                                <flux:error name="qr_code_redirect_url" />
-                            </flux:field>
-
-                            <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('sort_order')]) for="sort_order" badge="*" required>{{ __('ترتيب العرض') }}</flux:label>
-                                <flux:input type="number" id="sort_order" name="sort_order" class="font-mono" :value="old('sort_order')" min="1" step="1" lang="en" required />
-                                <flux:error name="sort_order" />
-                            </flux:field>
-
-                            <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('state')]) for="state" badge="*" required>{{ __('الحالة') }}</flux:label>
-                                <flux:select name="state" id="state">
-                                    @foreach ($states as $state)
-                                        <flux:select.option :value="$state->id" :selected="old('state') === $state->id">
-                                            {{ $state->action ?? $state->name }}
-                                        </flux:select.option>
-                                    @endforeach
-                                </flux:select>
-                                <flux:error name="state" />
                             </flux:field>
                         </div>
 
