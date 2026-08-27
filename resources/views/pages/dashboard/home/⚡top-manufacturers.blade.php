@@ -21,12 +21,11 @@ new #[Defer(bundle: true)] class extends Component
 }; ?>
 
 <div>
-    @if ($manufacturers->isNotEmpty())
-        @php
-            $maxCount = $manufacturers->max('count') ?: 1;
-        @endphp
-
-        <x-dashboard.panel-card tone="orange">
+    <x-dashboard.panel-card tone="orange">
+        @if ($manufacturers->isNotEmpty())
+            @php
+                $maxCount = $manufacturers->max('count') ?: 1;
+            @endphp
             <ul class="divide-y divide-zinc-100">
                 @foreach ($manufacturers as $index => $manufacturer)
                     @php
@@ -56,6 +55,8 @@ new #[Defer(bundle: true)] class extends Component
                     </li>
                 @endforeach
             </ul>
-        </x-dashboard.panel-card>
-    @endif
+        @else
+            <x-empty-state :text="__('لا توجد شركات مصنعة بعد.')" />
+        @endif
+    </x-dashboard.panel-card>
 </div>
