@@ -54,7 +54,7 @@
                         </flux:field>
 
                         <flux:field>
-                            <x-detail-label :label="__('الرابط')" />
+                            <x-detail-label :label="__('الرابط (Slug)')" />
                             <x-detail-slug-value :slug="$category->slug" />
                         </flux:field>
 

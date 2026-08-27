@@ -32,10 +32,6 @@
         </div>
 
         <section>
-            <livewire:pages::dashboard.home.product-growth-chart defer />
-        </section>
-
-        <section>
             <livewire:pages::dashboard.home.products-by-category-chart defer />
         </section>
 

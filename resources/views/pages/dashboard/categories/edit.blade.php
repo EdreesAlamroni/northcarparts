@@ -42,7 +42,7 @@
                             </flux:field>
 
                             <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('slug')]) for="slug" badge="*" required>{{ __('الرابط') }}</flux:label>
+                                <flux:label @class(['text-red-600' => $errors->has('slug')]) for="slug" badge="*" required>{{ __('الرابط (Slug)') }}</flux:label>
                                 <flux:input type="text" id="slug" name="slug" :value="old('slug', $category->slug)" autocomplete="off" lang="en" required />
                                 <flux:error name="slug" />
                             </flux:field>
