@@ -49,7 +49,7 @@
                 <x-slot:slot class="space-y-6">
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <flux:field>
-                            <x-detail-label :label="__('الكود')" />
+                            <x-detail-label :label="__('كود الفلتر')" />
                             <x-detail-value :value="$product->code" class="font-mono" />
                         </flux:field>
 

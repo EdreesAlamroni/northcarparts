@@ -34,7 +34,7 @@
                     <x-slot:slot class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('code')]) for="code" badge="*" required>{{ __('الكود') }}</flux:label>
+                                <flux:label @class(['text-red-600' => $errors->has('code')]) for="code" badge="*" required>{{ __('كود الفلتر') }}</flux:label>
                                 <flux:input type="text" id="code" name="code" x-ref="code" :value="old('code')" autocomplete="off" lang="en" required />
                                 <flux:error name="code" />
                             </flux:field>

@@ -39,7 +39,7 @@
 
                     <x-slot:slot>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            <flux:input type="text" name="filter[code]" :value="request()->input('filter.code')" autocomplete="off" lang="en" :placeholder="__('الكود')" />
+                            <flux:input type="text" name="filter[code]" :value="request()->input('filter.code')" autocomplete="off" lang="en" :placeholder="__('كود الفلتر')" />
                         </div>
                     </x-slot:slot>
 
@@ -64,7 +64,7 @@
                         <table>
                             <thead>
                                 <th scope="col">#</th>
-                                <th scope="col">{{ __('الكود') }}</th>
+                                <th scope="col">{{ __('كود الفلتر') }}</th>
                                 <th scope="col">{{ __('التصنيف') }}</th>
                                 <th scope="col">{{ __('الحالة') }}</th>
                                 <th scope="col"></th>
