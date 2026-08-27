@@ -1,0 +1,279 @@
+/*
+ * Dashboard tone utilities — scoped to dashboard home components only.
+ */
+
+.dashboard-stat-card {
+    @apply border-zinc-200/80 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md;
+}
+
+.dashboard-stat-card--blue {
+    @apply border-t-2 border-t-blue-400;
+}
+
+.dashboard-stat-card--green {
+    @apply border-t-2 border-t-green-400;
+}
+
+.dashboard-stat-card--purple {
+    @apply border-t-2 border-t-purple-400;
+}
+
+.dashboard-stat-card--teal {
+    @apply border-t-2 border-t-teal-400;
+}
+
+.dashboard-stat-card--orange {
+    @apply border-t-2 border-t-orange-400;
+}
+
+.dashboard-stat-card--sky {
+    @apply border-t-2 border-t-sky-400;
+}
+
+.dashboard-stat-card--pink {
+    @apply border-t-2 border-t-pink-400;
+}
+
+.dashboard-stat-icon--blue {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-blue-100 text-blue-600;
+}
+
+.dashboard-stat-icon--green {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-green-100 text-green-600;
+}
+
+.dashboard-stat-icon--purple {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-purple-100 text-purple-600;
+}
+
+.dashboard-stat-icon--teal {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-teal-100 text-teal-600;
+}
+
+.dashboard-stat-icon--orange {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-orange-100 text-orange-600;
+}
+
+.dashboard-stat-icon--sky {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-sky-100 text-sky-600;
+}
+
+.dashboard-stat-icon--pink {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-pink-100 text-pink-600;
+}
+
+.dashboard-panel-card {
+    @apply overflow-hidden border-zinc-200/80 bg-white shadow-sm;
+}
+
+.dashboard-panel-card--blue {
+    @apply border-zinc-200/80 bg-white;
+}
+
+.dashboard-panel-card--green {
+    @apply border-zinc-200/80 bg-white;
+}
+
+.dashboard-panel-card--purple {
+    @apply border-zinc-200/80 bg-white;
+}
+
+.dashboard-panel-card--teal {
+    @apply border-zinc-200/80 bg-white;
+}
+
+.dashboard-panel-card--orange {
+    @apply border-zinc-200/80 bg-white;
+}
+
+.dashboard-panel-card--sky {
+    @apply border-zinc-200/80 bg-white;
+}
+
+.dashboard-panel-card--pink {
+    @apply border-zinc-200/80 bg-white;
+}
+
+.dashboard-panel-icon--blue {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-blue-100 text-blue-600;
+}
+
+.dashboard-panel-icon--green {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-green-100 text-green-600;
+}
+
+.dashboard-panel-icon--purple {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-purple-100 text-purple-600;
+}
+
+.dashboard-panel-icon--teal {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-teal-100 text-teal-600;
+}
+
+.dashboard-panel-icon--orange {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-orange-100 text-orange-600;
+}
+
+.dashboard-panel-icon--sky {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-sky-100 text-sky-600;
+}
+
+.dashboard-panel-icon--pink {
+    @apply inline-flex size-7 items-center justify-center rounded-lg bg-pink-100 text-pink-600;
+}
+
+.dashboard-panel-heading {
+    @apply border-b border-zinc-100;
+}
+
+.dashboard-panel-body {
+    @apply p-5 lg:p-6;
+}
+
+.dashboard-rank-badge--1 {
+    @apply bg-blue-100 text-blue-700;
+}
+
+.dashboard-rank-badge--2 {
+    @apply bg-teal-100 text-teal-700;
+}
+
+.dashboard-rank-badge--3 {
+    @apply bg-green-100 text-green-700;
+}
+
+.dashboard-rank-badge--4 {
+    @apply bg-purple-100 text-purple-700;
+}
+
+.dashboard-rank-badge--5 {
+    @apply bg-orange-100 text-orange-700;
+}
+
+.dashboard-rank-bar--1 {
+    @apply bg-blue-100;
+}
+
+.dashboard-rank-bar--2 {
+    @apply bg-teal-100;
+}
+
+.dashboard-rank-bar--3 {
+    @apply bg-green-100;
+}
+
+.dashboard-rank-bar--4 {
+    @apply bg-purple-100;
+}
+
+.dashboard-rank-bar--5 {
+    @apply bg-orange-100;
+}
+
+.dashboard-section-heading {
+    @apply mb-4 flex items-center gap-x-3;
+}
+
+.dashboard-section-heading__accent--blue {
+    @apply h-4 w-0.5 rounded-full bg-blue-300;
+}
+
+.dashboard-section-heading__accent--green {
+    @apply h-4 w-0.5 rounded-full bg-green-300;
+}
+
+.dashboard-section-heading__accent--purple {
+    @apply h-4 w-0.5 rounded-full bg-purple-300;
+}
+
+.dashboard-section-heading__accent--teal {
+    @apply h-4 w-0.5 rounded-full bg-teal-300;
+}
+
+.dashboard-section-heading__accent--orange {
+    @apply h-4 w-0.5 rounded-full bg-orange-300;
+}
+
+.dashboard-section-heading__accent--sky {
+    @apply h-4 w-0.5 rounded-full bg-sky-300;
+}
+
+.dashboard-section-heading__accent--pink {
+    @apply h-4 w-0.5 rounded-full bg-pink-300;
+}
+
+.dashboard-skeleton-card {
+    @apply rounded-lg bg-white shadow-sm ring-1 ring-zinc-200/80;
+}
+
+.dashboard-skeleton--blue .dashboard-skeleton__title {
+    @apply bg-blue-100;
+}
+
+.dashboard-skeleton--blue .dashboard-skeleton__subtitle {
+    @apply bg-blue-50;
+}
+
+.dashboard-skeleton--blue .dashboard-skeleton__body {
+    @apply bg-blue-50;
+}
+
+.dashboard-skeleton--teal .dashboard-skeleton__title {
+    @apply bg-teal-100;
+}
+
+.dashboard-skeleton--teal .dashboard-skeleton__subtitle {
+    @apply bg-teal-50;
+}
+
+.dashboard-skeleton--teal .dashboard-skeleton__body {
+    @apply bg-teal-50;
+}
+
+.dashboard-skeleton--orange .dashboard-skeleton__title {
+    @apply bg-orange-100;
+}
+
+.dashboard-skeleton--orange .dashboard-skeleton__subtitle {
+    @apply bg-orange-50;
+}
+
+.dashboard-skeleton--orange .dashboard-skeleton__body {
+    @apply bg-orange-50;
+}
+
+.dashboard-skeleton--sky .dashboard-skeleton__title {
+    @apply bg-sky-100;
+}
+
+.dashboard-skeleton--sky .dashboard-skeleton__subtitle {
+    @apply bg-sky-50;
+}
+
+.dashboard-skeleton--sky .dashboard-skeleton__body {
+    @apply bg-sky-50;
+}
+
+.dashboard-skeleton--pink .dashboard-skeleton__title {
+    @apply bg-pink-100;
+}
+
+.dashboard-skeleton--pink .dashboard-skeleton__subtitle {
+    @apply bg-pink-50;
+}
+
+.dashboard-skeleton--pink .dashboard-skeleton__body {
+    @apply bg-pink-50;
+}
+
+.dashboard-skeleton--zinc .dashboard-skeleton__title {
+    @apply bg-zinc-200;
+}
+
+.dashboard-skeleton--zinc .dashboard-skeleton__subtitle {
+    @apply bg-zinc-100;
+}
+
+.dashboard-skeleton--zinc .dashboard-skeleton__body {
+    @apply bg-zinc-100;
+}

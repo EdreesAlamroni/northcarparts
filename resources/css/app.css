@@ -1,0 +1,157 @@
+@import "tailwindcss";
+@import "../../vendor/livewire/flux/dist/flux.css";
+
+@import "./fonts.css";
+@import "./state.css";
+@import "./dashboard.css";
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans:
+        "SomarSans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    --color-zinc-50: var(--color-slate-50);
+    --color-zinc-100: var(--color-slate-100);
+    --color-zinc-200: var(--color-slate-200);
+    --color-zinc-300: var(--color-slate-300);
+    --color-zinc-400: var(--color-slate-400);
+    --color-zinc-500: var(--color-slate-500);
+    --color-zinc-600: var(--color-slate-600);
+    --color-zinc-700: var(--color-slate-700);
+    --color-zinc-800: var(--color-slate-800);
+    --color-zinc-900: var(--color-slate-900);
+    --color-zinc-950: var(--color-slate-950);
+
+    --color-accent: var(--color-blue-500);
+    --color-accent-content: var(--color-blue-600);
+    --color-accent-foreground: var(--color-white);
+
+    --animate-bounce-x: bounce-x 1s infinite;
+
+    @keyframes bounce-x {
+        0%,
+        100% {
+            transform: translateX(0);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+        }
+        50% {
+            transform: translateX(-25%);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        }
+    }
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-blue-500);
+        --color-accent-content: var(--color-blue-400);
+        --color-accent-foreground: var(--color-white);
+    }
+}
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+
+    table {
+        @apply w-full rtl:text-right ltr:text-left divide-y divide-zinc-200;
+    }
+    table thead th {
+        @apply p-3 text-sm font-medium text-zinc-500 whitespace-nowrap;
+    }
+    table tbody {
+        @apply bg-white divide-y divide-zinc-200/70;
+    }
+    table tbody tr td {
+        @apply p-3 text-sm text-black whitespace-nowrap;
+    }
+    table tbody tr td.actions {
+        @apply space-x-3 text-left ltr:text-right leading-[0] whitespace-nowrap;
+    }
+    table tbody tr td.actions > .view {
+        @apply !inline-flex !items-center gap-x-1 text-xs font-normal text-accent rounded-md cursor-pointer focus:outline-none hover:[&>svg]:animate-bounce-x;
+    }
+    table tfoot {
+        @apply bg-transparent;
+    }
+    table tfoot td,
+    table tfoot th {
+        @apply p-3 text-sm font-medium text-zinc-500;
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply !mb-0 !leading-tight select-none;
+}
+
+[data-flux-label]:where([required]) {
+    @apply [&>span:first-of-type]:text-red-600 [&>span:first-of-type]:bg-transparent [&>span:first-of-type]:p-0;
+}
+
+[data-flux-label]:where([optional]) {
+    @apply [&>span:first-of-type]:text-green-600 [&>span:first-of-type]:bg-transparent [&>span:first-of-type]:p-0;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-[1.5px] ring-accent ring-offset-1 ring-offset-accent-foreground;
+}
+
+[data-flux-navlist-item]:focus,
+[data-flux-button]:focus,
+[data-flux-navbar-items]:focus,
+[data-flux-profile]:focus,
+[data-flux-checkbox]:focus {
+    @apply outline-hidden ring-[1.5px] ring-accent ring-offset-1 ring-offset-accent-foreground;
+}
+
+[data-flux-error] {
+    @apply mt-0 text-xs font-normal;
+}
+[data-flux-error] > svg {
+    @apply size-4;
+}
+
+[data-flux-checkbox],
+[data-flux-checkbox-indicator] {
+    @apply size-4;
+}
+
+/* [data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+} */
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
