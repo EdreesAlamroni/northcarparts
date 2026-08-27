@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Enums\FilterType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\StoreProductRequest;
 use App\Http\Requests\Dashboard\UpdateProductRequest;
@@ -30,7 +29,6 @@ class ProductController extends Controller
                 'uuid',
                 'category_id',
                 'code',
-                'name',
                 'state',
                 'created_at',
             ])
@@ -38,7 +36,6 @@ class ProductController extends Controller
             ->allowedFilters(
                 'code',
                 'slug',
-                'name',
             )
             ->latest()
             ->paginate()
@@ -58,7 +55,6 @@ class ProductController extends Controller
             'categories' => Category::list(),
             'manufacturers' => Manufacturer::list(),
             'states' => Product::getStateOptions(),
-            'filterTypes' => FilterType::options(),
             'groupedSpecifications' => $groupedSpecifications->all(),
         ]);
     }
@@ -121,8 +117,6 @@ class ProductController extends Controller
             'product' => $product,
             'categories' => Category::list(),
             'manufacturers' => Manufacturer::list(),
-            'states' => Product::getStateOptions(),
-            'filterTypes' => FilterType::options(),
             'groupedSpecifications' => $groupedSpecifications->all(),
             'selectedGroups' => $product->specificationValues
                 ->pluck('specification_id')

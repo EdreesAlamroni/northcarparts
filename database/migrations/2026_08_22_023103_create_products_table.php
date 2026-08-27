@@ -16,16 +16,11 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('code')->unique();
             $table->string('name')->nullable();
-            $table->string('filter_type');
-            $table->string('oem_number')->nullable();
-            $table->string('qr_code_redirect_url')->unique();
-            $table->unsignedInteger('sort_order')->default(0);
+            $table->string('filter_type')->index();
+            $table->string('oem_number')->nullable()->index();
+            $table->unsignedInteger('sort_order')->default(0)->index();
             $table->string('state');
             $table->timestamps();
-
-            $table->index('oem_number');
-            $table->index('filter_type');
-            $table->index(['category_id', 'state', 'sort_order']);
         });
     }
 

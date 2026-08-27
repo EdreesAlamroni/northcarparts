@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Enums\FilterType;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Product;
@@ -31,10 +30,7 @@ class ProductFactory extends Factory
             'oem_manufacturer_id' => Manufacturer::factory(),
             'slug' => Str::slug($code),
             'code' => $code,
-            'name' => fake()->words(3, true),
-            'filter_type' => FilterType::SpinOnOilFilter,
             'oem_number' => fake()->bothify('??###-#####'),
-            'qr_code_redirect_url' => 'https://example.com/products/'.Str::slug($code),
             'sort_order' => fake()->numberBetween(1, 100),
             'state' => Visible::name(),
         ];

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Enums\FilterType;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Product;
@@ -20,8 +19,6 @@ class ProductSeeder extends Seeder
                 'code' => 'NCP-101',
                 'category_slug' => 'oil-filters',
                 'manufacturer_name' => 'Toyota',
-                'name' => 'فلتر زيت Toyota Spin-On',
-                'filter_type' => FilterType::SpinOnOilFilter,
                 'oem_number' => '90915-54940',
                 'sort_order' => 1,
             ],
@@ -29,8 +26,6 @@ class ProductSeeder extends Seeder
                 'code' => 'NCP-102',
                 'category_slug' => 'oil-filters',
                 'manufacturer_name' => 'Bosch',
-                'name' => 'فلتر زيت Bosch Eco',
-                'filter_type' => FilterType::EcoOilFilter,
                 'oem_number' => '0451103316',
                 'sort_order' => 2,
             ],
@@ -38,8 +33,6 @@ class ProductSeeder extends Seeder
                 'code' => 'NCP-201',
                 'category_slug' => 'air-filters',
                 'manufacturer_name' => 'Mann-Filter',
-                'name' => 'فلتر هواء Mann-Filter',
-                'filter_type' => FilterType::AirFilter,
                 'oem_number' => 'C 25 115',
                 'sort_order' => 1,
             ],
@@ -47,8 +40,6 @@ class ProductSeeder extends Seeder
                 'code' => 'NCP-301',
                 'category_slug' => 'cabin-filters',
                 'manufacturer_name' => 'Mahle',
-                'name' => 'فلتر مقصورة Mahle',
-                'filter_type' => FilterType::AirFilter,
                 'oem_number' => 'LA 461',
                 'sort_order' => 1,
             ],
@@ -56,8 +47,6 @@ class ProductSeeder extends Seeder
                 'code' => 'NCP-401',
                 'category_slug' => 'fuel-filters',
                 'manufacturer_name' => 'Denso',
-                'name' => 'فلتر وقود Denso',
-                'filter_type' => FilterType::SpinOnOilFilter,
                 'oem_number' => '23300-78090',
                 'sort_order' => 1,
             ],
@@ -65,8 +54,6 @@ class ProductSeeder extends Seeder
                 'code' => 'NCP-402',
                 'category_slug' => 'fuel-filters',
                 'manufacturer_name' => 'Hyundai',
-                'name' => 'فلتر وقود Hyundai',
-                'filter_type' => FilterType::SpinOnOilFilter,
                 'oem_number' => '31973-2E900',
                 'sort_order' => 2,
             ],
@@ -88,10 +75,7 @@ class ProductSeeder extends Seeder
                     'category_id' => $categories[$product['category_slug']],
                     'oem_manufacturer_id' => $manufacturers[$product['manufacturer_name']],
                     'slug' => Str::slug($product['code']),
-                    'name' => $product['name'],
-                    'filter_type' => $product['filter_type'],
                     'oem_number' => $product['oem_number'],
-                    'qr_code_redirect_url' => 'https://example.com?product='.$product['code'],
                     'sort_order' => $product['sort_order'],
                     'state' => Visible::name(),
                 ],

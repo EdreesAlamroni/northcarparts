@@ -49,17 +49,12 @@
                 <x-slot:slot class="space-y-6">
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <flux:field>
-                            <x-detail-label :label="__('الاسم')" />
-                            <x-detail-value :value="$product->name" />
-                        </flux:field>
-
-                        <flux:field>
                             <x-detail-label :label="__('الكود')" />
                             <x-detail-value :value="$product->code" class="font-mono" />
                         </flux:field>
 
                         <flux:field>
-                            <x-detail-label :label="__('الرابط')" />
+                            <x-detail-label :label="__('الرابط (Slug)')" />
                             <x-detail-slug-value :slug="$product->slug" />
                         </flux:field>
 
@@ -79,20 +74,8 @@
                         </flux:field>
 
                         <flux:field>
-                            <x-detail-label :label="__('نوع الفلتر')" />
-                            <x-detail-value :value="$product->filter_type->label()" />
-                        </flux:field>
-
-                        <flux:field>
                             <x-detail-label :label="__('ترتيب العرض')" />
                             <x-detail-value :value="$product->sort_order" class="font-mono" />
-                        </flux:field>
-
-                        <flux:field>
-                            <x-detail-label :label="__('رابط الـ QR Code')" />
-                            <x-detail-value class="font-mono" dir="ltr">
-                                <x-external-link :value="$product->qr_code_redirect_url" />
-                            </x-detail-value>
                         </flux:field>
                     </div>
                 </x-slot:slot>
@@ -128,7 +111,7 @@
                                     <div class="h-48 w-full p-1 rounded-lg border border-zinc-200 object-contain">
                                         <img
                                             src="{{ $product->getFirstMediaUrl('image') }}"
-                                            alt="{{ $product->name ?? $product->code }}"
+                                            alt="{{ $product->code }}"
                                             class="w-full h-full object-contain"
                                         />
                                     </div >

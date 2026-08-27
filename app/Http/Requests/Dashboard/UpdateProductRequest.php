@@ -2,15 +2,12 @@
 
 namespace App\Http\Requests\Dashboard;
 
-use App\Enums\FilterType;
 use App\Http\Requests\Dashboard\Concerns\ValidatesProductSpecifications;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Product;
-use App\ModelStates\Product\ProductState;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Spatie\ModelStates\Validation\ValidStateRule;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -47,34 +44,10 @@ class UpdateProductRequest extends FormRequest
                 'max:255',
                 Rule::unique(Product::class, 'slug')->ignore($product->id),
             ],
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-            'filter_type' => [
-                'required',
-                Rule::enum(FilterType::class),
-            ],
             'oem_number' => [
                 'required',
                 'string',
                 'max:255',
-            ],
-            'qr_code_redirect_url' => [
-                'required',
-                'url',
-                'regex:/^https?:\/\//i',
-                'max:255',
-                Rule::unique(Product::class, 'qr_code_redirect_url')->ignore($product->id),
-            ],
-            'sort_order' => [
-                'required',
-                'integer',
-                'min:0',
-            ],
-            'state' => [
-                new ValidStateRule(ProductState::class),
             ],
             ...$this->specificationRules(),
         ];

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Concerns\HasUuid;
 use App\Concerns\ModelStateUtilities;
-use App\Enums\FilterType;
 use App\ModelStates\Product\ProductState;
 use App\ModelStates\Product\States\Visible;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
@@ -27,10 +26,7 @@ use Spatie\ModelStates\HasStates;
  * @property int|null $oem_manufacturer_id
  * @property string $slug
  * @property string $code
- * @property string|null $name
- * @property FilterType $filter_type
  * @property string|null $oem_number
- * @property string $qr_code_redirect_url
  * @property int $sort_order
  * @property ProductState $state
  * @property Carbon|null $created_at
@@ -48,7 +44,6 @@ class Product extends Model implements HasMedia
     protected function casts(): array
     {
         return [
-            'filter_type' => FilterType::class,
             'sort_order' => 'integer',
             'state' => ProductState::class,
         ];
@@ -108,7 +103,7 @@ class Product extends Model implements HasMedia
 
     public function redirectUrl(): string
     {
-        return $this->qr_code_redirect_url;
+        return route('website.products.show', $this->slug, absolute: true);
     }
 
     /*

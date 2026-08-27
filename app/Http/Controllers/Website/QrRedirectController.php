@@ -8,15 +8,15 @@ use Illuminate\Http\RedirectResponse;
 
 class QrRedirectController extends Controller
 {
-    public function __invoke(string $qrCodeRedirectUrl): RedirectResponse
+    public function __invoke(string $slug): RedirectResponse
     {
         $product = Product::query()
             ->visible()
-            ->where('qr_code_redirect_url', '=', $qrCodeRedirectUrl)
+            ->where('slug', '=', $slug)
             ->first();
 
         abort_if($product === null, 404);
 
-        dd('QR REDIRECT PAGE HERE');
+        return redirect()->route('website.products.show', $product->slug);
     }
 }

@@ -40,7 +40,6 @@
                     <x-slot:slot>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             <flux:input type="text" name="filter[code]" :value="request()->input('filter.code')" autocomplete="off" lang="en" :placeholder="__('الكود')" />
-                            <flux:input type="text" name="filter[name]" :value="request()->input('filter.name')" autocomplete="off" :placeholder="__('الاسم')" />
                         </div>
                     </x-slot:slot>
 
@@ -66,7 +65,6 @@
                             <thead>
                                 <th scope="col">#</th>
                                 <th scope="col">{{ __('الكود') }}</th>
-                                <th scope="col">{{ __('الاسم') }}</th>
                                 <th scope="col">{{ __('التصنيف') }}</th>
                                 <th scope="col">{{ __('الحالة') }}</th>
                                 <th scope="col"></th>
@@ -76,7 +74,6 @@
                                     <tr>
                                         <td class="font-mono">{{ $loop->iteration }}</td>
                                         <td class="font-mono">{{ $product->code }}</td>
-                                        <td>{{ $product->name }}</td>
                                         <td>
                                             <x-table-nullable-cell :value="$product->category?->name" />
                                         </td>
