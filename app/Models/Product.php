@@ -33,7 +33,7 @@ use Spatie\ModelStates\HasStates;
  * @property Carbon|null $updated_at
  * @property-read Category $category
  * @property-read Manufacturer|null $manufacturer
- * @property-read EloquentCollection<int, SpecificationValue> $specificationValues
+ * @property-read EloquentCollection<int, Specification> $specifications
  */
 #[Guarded(['id'])]
 class Product extends Model implements HasMedia
@@ -77,9 +77,10 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(Manufacturer::class, 'oem_manufacturer_id');
     }
 
-    public function specificationValues(): BelongsToMany
+    public function specifications(): BelongsToMany
     {
-        return $this->belongsToMany(SpecificationValue::class, 'product_specification_value');
+        return $this->belongsToMany(Specification::class, 'product_specification')
+            ->withPivot('value');
     }
 
     /*
@@ -95,15 +96,6 @@ class Product extends Model implements HasMedia
         $this->addMediaCollection('image')
             ->singleFile()
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp']);
-
-        $this->addMediaCollection('qr_code')
-            ->singleFile()
-            ->acceptsMimeTypes(['image/png']);
-    }
-
-    public function redirectUrl(): string
-    {
-        return route('website.products.show', $this->slug, absolute: true);
     }
 
     /*

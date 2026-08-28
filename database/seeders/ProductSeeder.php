@@ -81,37 +81,37 @@ class ProductSeeder extends Seeder
                 ],
             );
 
-            $specificationValueIds = match ($product['code']) {
+            $specifications = match ($product['code']) {
                 'NCP-101' => [
-                    $height->values()->where('value', '=', '86 mm')->firstOrFail()->id,
-                    $diameter->values()->where('value', '=', '68 mm')->firstOrFail()->id,
+                    $height->id => ['value' => '86 mm'],
+                    $diameter->id => ['value' => '68 mm'],
                 ],
                 'NCP-102' => [
-                    $height->values()->where('value', '=', '72 mm')->firstOrFail()->id,
-                    $diameter->values()->where('value', '=', '82 mm')->firstOrFail()->id,
+                    $height->id => ['value' => '72 mm'],
+                    $diameter->id => ['value' => '82 mm'],
                 ],
                 'NCP-201' => [
-                    $length->values()->where('value', '=', '247 mm')->firstOrFail()->id,
-                    $width->values()->where('value', '=', '193 mm')->firstOrFail()->id,
-                    $height->values()->where('value', '=', '58 mm')->firstOrFail()->id,
+                    $length->id => ['value' => '247 mm'],
+                    $width->id => ['value' => '193 mm'],
+                    $height->id => ['value' => '58 mm'],
                 ],
                 'NCP-301' => [
-                    $length->values()->where('value', '=', '225 mm')->firstOrFail()->id,
-                    $width->values()->where('value', '=', '235 mm')->firstOrFail()->id,
-                    $height->values()->where('value', '=', '56 mm')->firstOrFail()->id,
+                    $length->id => ['value' => '225 mm'],
+                    $width->id => ['value' => '235 mm'],
+                    $height->id => ['value' => '56 mm'],
                 ],
                 'NCP-401' => [
-                    $height->values()->where('value', '=', '95 mm')->firstOrFail()->id,
-                    $diameter->values()->where('value', '=', '65 mm')->firstOrFail()->id,
+                    $height->id => ['value' => '95 mm'],
+                    $diameter->id => ['value' => '65 mm'],
                 ],
                 'NCP-402' => [
-                    $height->values()->where('value', '=', '144 mm')->firstOrFail()->id,
-                    $diameter->values()->where('value', '=', '80 mm')->firstOrFail()->id,
+                    $height->id => ['value' => '144 mm'],
+                    $diameter->id => ['value' => '80 mm'],
                 ],
                 default => [],
             };
 
-            $createdProduct->specificationValues()->sync($specificationValueIds);
+            $createdProduct->specifications()->sync($specifications);
         }
     }
 }

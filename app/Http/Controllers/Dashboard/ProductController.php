@@ -8,8 +8,7 @@ use App\Http\Requests\Dashboard\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Product;
-use App\Services\ProductQrCodeGenerator;
-use App\Support\GroupedSpecifications;
+use App\Models\Specification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -47,7 +46,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function create(GroupedSpecifications $groupedSpecifications): View
+    public function create(): View
     {
         Gate::authorize('create', Product::class);
 
@@ -55,7 +54,7 @@ class ProductController extends Controller
             'categories' => Category::list(),
             'manufacturers' => Manufacturer::list(),
             'states' => Product::getStateOptions(),
-            'groupedSpecifications' => $groupedSpecifications->all(),
+            'specifications' => Specification::list(),
         ]);
     }
 
@@ -66,8 +65,7 @@ class ProductController extends Controller
         $product = DB::transaction(function () use ($request) {
             $validatedData = $request->safe()->except([
                 'image',
-                'specification_groups',
-                'specification_value_ids',
+                'specifications',
             ]);
 
             /** @var Product $product */
@@ -77,11 +75,7 @@ class ProductController extends Controller
                 $product->addMediaFromRequest('image')->toMediaCollection('image');
             }
 
-            $product->specificationValues()->sync(
-                $request->validated('specification_value_ids') ?? [],
-            );
-
-            app(ProductQrCodeGenerator::class)->regenerate($product);
+            $this->syncSpecifications($product, $request->validated('specifications') ?? []);
 
             return $product;
         });
@@ -91,40 +85,35 @@ class ProductController extends Controller
         return to_route('dashboard.products.show', $product);
     }
 
-    public function show(Product $product, GroupedSpecifications $groupedSpecifications): View
+    public function show(Product $product): View
     {
         Gate::authorize('view', $product);
 
         $product->load([
             'category:id,name',
             'manufacturer:id,name',
-            'specificationValues.specification:id,name',
+            'specifications:id,name',
         ]);
 
         return view('pages.dashboard.products.show', [
             'product' => $product,
-            'groupedSpecifications' => $groupedSpecifications->forProduct($product),
+            'specifications' => $product->specifications->sortBy('name')->values(),
         ]);
     }
 
-    public function edit(Product $product, GroupedSpecifications $groupedSpecifications): View
+    public function edit(Product $product): View
     {
         Gate::authorize('update', $product);
 
-        $product->load(['specificationValues:id,specification_id,value']);
+        $product->load(['specifications:id,name']);
 
         return view('pages.dashboard.products.edit', [
             'product' => $product,
             'categories' => Category::list(),
             'manufacturers' => Manufacturer::list(),
-            'groupedSpecifications' => $groupedSpecifications->all(),
-            'selectedGroups' => $product->specificationValues
-                ->pluck('specification_id')
-                ->unique()
-                ->values()
-                ->all(),
-            'selectedValueIds' => $product->specificationValues
-                ->pluck('id')
+            'specifications' => Specification::list(),
+            'specificationValues' => $product->specifications
+                ->pluck('pivot.value', 'id')
                 ->all(),
         ]);
     }
@@ -135,17 +124,12 @@ class ProductController extends Controller
 
         $product = DB::transaction(function () use ($request, $product) {
             $validatedData = $request->safe()->except([
-                'specification_groups',
-                'specification_value_ids',
+                'specifications',
             ]);
 
             $product->update($validatedData);
 
-            $product->specificationValues()->sync(
-                $request->validated('specification_value_ids') ?? [],
-            );
-
-            app(ProductQrCodeGenerator::class)->regenerate($product);
+            $this->syncSpecifications($product, $request->validated('specifications') ?? []);
 
             return $product->refresh();
         });
@@ -164,5 +148,17 @@ class ProductController extends Controller
         toast_success('delete');
 
         return to_route('dashboard.products.index');
+    }
+
+    private function syncSpecifications(Product $product, array $specifications): void
+    {
+        $syncData = collect($specifications)
+            ->filter(fn (?string $value): bool => filled($value))
+            ->mapWithKeys(fn (string $value, int|string $id): array => [
+                (int) $id => ['value' => trim($value)],
+            ])
+            ->all();
+
+        $product->specifications()->sync($syncData);
     }
 }

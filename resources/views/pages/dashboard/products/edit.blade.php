@@ -78,10 +78,9 @@
                             </flux:field>
                         </div>
 
-                        <x-grouped-specifications-fieldset
-                            :grouped-specifications="$groupedSpecifications"
-                            :selected-groups="$selectedGroups"
-                            :selected-value-ids="$selectedValueIds"
+                        <x-product-specifications-fieldset
+                            :specifications="$specifications"
+                            :values="$specificationValues"
                         />
                     </x-slot:slot>
 

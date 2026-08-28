@@ -3,30 +3,21 @@
 namespace App\Http\Requests\Dashboard\Concerns;
 
 use App\Models\Specification;
-use App\Models\SpecificationValue;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Validation\Rule;
 
 trait ValidatesProductSpecifications
 {
     protected function specificationRules(): array
     {
         return [
-            'specification_groups' => [
+            'specifications' => [
                 'nullable',
                 'array',
             ],
-            'specification_groups.*' => [
-                'integer',
-                Rule::exists(Specification::class, 'id'),
-            ],
-            'specification_value_ids' => [
+            'specifications.*' => [
                 'nullable',
-                'array',
-            ],
-            'specification_value_ids.*' => [
-                'integer',
-                Rule::exists(SpecificationValue::class, 'id'),
+                'string',
+                'max:255',
             ],
         ];
     }
@@ -34,29 +25,24 @@ trait ValidatesProductSpecifications
     public function withValidator(Validator $validator): void
     {
         $validator->after(function (Validator $validator): void {
-            $groupIds = collect($this->input('specification_groups', []))
+            $specificationIds = collect($this->input('specifications', []))
+                ->keys()
                 ->map(fn (mixed $id): int => (int) $id)
                 ->filter()
                 ->values();
 
-            $valueIds = collect($this->input('specification_value_ids', []))
-                ->map(fn (mixed $id): int => (int) $id)
-                ->filter()
-                ->values();
-
-            if ($valueIds->isEmpty()) {
+            if ($specificationIds->isEmpty()) {
                 return;
             }
 
-            $invalidCount = SpecificationValue::query()
-                ->whereIn('id', $valueIds)
-                ->whereNotIn('specification_id', $groupIds)
+            $validCount = Specification::query()
+                ->whereIn('id', $specificationIds)
                 ->count();
 
-            if ($invalidCount > 0) {
+            if ($validCount !== $specificationIds->count()) {
                 $validator->errors()->add(
-                    'specification_value_ids',
-                    __('قيمة الخاصية المحددة لا تنتمي إلى المجموعة المختارة.'),
+                    'specifications',
+                    __('الخاصية المحددة غير صحيحة.'),
                 );
             }
         });

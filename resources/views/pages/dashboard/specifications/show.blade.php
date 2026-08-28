@@ -18,10 +18,6 @@
         @canany(['update', 'delete'], $specification)
             <x-actions-section>
                 @can('update', $specification)
-                    <livewire:pages::dashboard.specifications.create-value :specification="$specification" />
-                @endcan
-
-                @can('update', $specification)
                     <livewire:pages::dashboard.specifications.update :specification="$specification" />
                 @endcan
 
@@ -52,47 +48,6 @@
                             <x-detail-value :value="$specification->products_count" class="font-mono" />
                         </flux:field>
                     </div>
-                </x-slot:slot>
-            </x-card>
-
-            <x-card>
-                <x-slot:heading>
-                    <x-slot:title>
-                        <flux:icon name="list-bullet" class="w-4 h-4 shrink-0" />
-                        <flux:heading>{{ __('قيم الخاصية') }}</flux:heading>
-                    </x-slot:title>
-                </x-slot:heading>
-
-                <x-slot:slot class="overflow-x-auto">
-                    @if ($specification->values->isNotEmpty())
-                        <table>
-                            <thead>
-                                <th scope="col">#</th>
-                                <th scope="col">{{ __('قيمة الخاصية') }}</th>
-                                @can('update', $specification)
-                                    <th scope="col"></th>
-                                @endcan
-                            </thead>
-                            <tbody>
-                                @foreach ($specification->values as $value)
-                                    <tr>
-                                        <td class="font-mono">{{ $loop->iteration }}</td>
-                                        <td>{{ $value->value }}</td>
-                                        @can('update', $specification)
-                                            <td class="actions">
-                                                <div class="flex items-center justify-end gap-x-2">
-                                                    <livewire:pages::dashboard.specifications.update-value :specification="$specification" :value="$value" :key="'update-'.$value->id" />
-                                                    <livewire:pages::dashboard.specifications.delete-value :specification="$specification" :value="$value" :key="'delete-'.$value->id" />
-                                                </div>
-                                            </td>
-                                        @endcan
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    @else
-                        <x-empty-state />
-                    @endif
                 </x-slot:slot>
             </x-card>
         </section>

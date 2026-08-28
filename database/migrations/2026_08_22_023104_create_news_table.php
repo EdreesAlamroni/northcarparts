@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('state');
             $table->date('published_at')->nullable();
             $table->timestamps();
-
-            $table->index(['state', 'published_at']);
         });
     }
 

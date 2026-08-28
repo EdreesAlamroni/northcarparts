@@ -17,9 +17,7 @@
         @canany(['create'], \App\Models\Specification::class)
             <x-actions-section>
                 @can('create', \App\Models\Specification::class)
-                    <flux:button :href="route('dashboard.specifications.create')" variant="primary" size="sm" icon="plus" wire:navigate>
-                        {{ __('إضافة خاصية جديدة') }}
-                    </flux:button>
+                    <livewire:pages::dashboard.specifications.create />
                 @endcan
             </x-actions-section>
         @endcanany

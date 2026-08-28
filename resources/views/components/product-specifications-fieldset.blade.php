@@ -1,0 +1,72 @@
+@props([
+    'specifications' => collect(),
+    'values' => [],
+])
+
+@php
+    $hasError = $errors->has('specifications') || collect($errors->get('specifications.*'))->isNotEmpty();
+    $hasSpecifications = $specifications->isNotEmpty();
+@endphp
+
+<flux:field>
+    <flux:label @class(['mb-1!', 'text-red-600' => $hasError])>{{ __('خصائص المنتج') }}</flux:label>
+
+    @if (! $hasSpecifications)
+        <x-empty-state
+            :text="__('لا توجد خصائص متاحة')"
+            :description="__('لم يتم إعداد أي خصائص بعد. يُرجى إضافة الخصائص من إدارة خصائص المنتجات.')"
+            icon="clipboard-document-list"
+        />
+    @else
+        <div class="overflow-hidden border border-zinc-200 bg-white">
+            <div
+                class="hidden border-b border-zinc-200 bg-zinc-50/80 px-4 py-2.5 sm:grid sm:grid-cols-[minmax(10rem,18rem)_minmax(0,1fr)] sm:gap-x-6"
+                aria-hidden="true"
+            >
+                <span class="text-xs font-medium text-zinc-500">{{ __('الخاصية') }}</span>
+                <span class="text-xs font-medium text-zinc-500">{{ __('القيمة') }}</span>
+            </div>
+
+            <ul class="divide-y divide-zinc-200/80" role="list">
+                @foreach ($specifications as $specification)
+                    @php
+                        $inputId = 'specification-'.$specification->id;
+                        $fieldName = 'specifications.'.$specification->id;
+                        $hasFieldError = $errors->has($fieldName);
+                    @endphp
+                    <li class="transition-colors hover:bg-zinc-50/40">
+                        <div class="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(10rem,18rem)_minmax(0,1fr)] sm:items-center sm:gap-x-6 sm:gap-y-0">
+                            <label
+                                for="{{ $inputId }}"
+                                @class([
+                                    'flex min-h-10 items-center rounded-md bg-zinc-50/60 px-4 py-2.5 sm:min-h-12 sm:rounded-none sm:border-e sm:border-zinc-200/80 sm:bg-zinc-50/50 sm:py-0',
+                                    'bg-red-50/70 sm:bg-red-50/60' => $hasFieldError,
+                                ])
+                            >
+                                <x-detail-label
+                                    :label="$specification->name"
+                                    @class(['text-red-600' => $hasFieldError])
+                                />
+                            </label>
+
+                            <div class="min-w-0 px-4 pb-3 sm:py-3">
+                                <div class="w-full">
+                                    <flux:input
+                                        type="text"
+                                        id="{{ $inputId }}"
+                                        name="specifications[{{ $specification->id }}]"
+                                        :value="old('specifications.'.$specification->id, $values[$specification->id] ?? '')"
+                                        autocomplete="off"
+                                    />
+                                    <flux:error name="specifications.{{ $specification->id }}" />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <flux:error name="specifications" />
+</flux:field>

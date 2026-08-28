@@ -84,7 +84,9 @@
                             </flux:field>
                         </div>
 
-                        <x-grouped-specifications-fieldset :grouped-specifications="$groupedSpecifications" />
+                        <flux:separator />
+
+                        <x-product-specifications-fieldset :specifications="$specifications" />
                     </x-slot:slot>
 
                     <x-slot:footer class="flex items-center justify-end gap-x-3">

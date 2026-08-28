@@ -8,18 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('specification_values', function (Blueprint $table) {
-            $table->id();
+        Schema::create('product_specification', function (Blueprint $table) {
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('specification_id')->constrained()->cascadeOnDelete();
             $table->string('value');
-            $table->timestamps();
 
-            $table->unique(['specification_id', 'value']);
+            $table->unique(['product_id', 'specification_id'], 'product_specification_unique');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('specification_values');
+        Schema::dropIfExists('product_specification');
     }
 };

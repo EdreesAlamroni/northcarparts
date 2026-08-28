@@ -90,7 +90,7 @@
                 </x-slot:heading>
 
                 <x-slot:slot class="overflow-x-auto">
-                    <x-grouped-specifications-show :grouped-specifications="$groupedSpecifications" />
+                    <x-product-specifications-show :specifications="$specifications" />
                 </x-slot:slot>
             </x-card>
 
@@ -103,34 +103,17 @@
                 </x-slot:heading>
 
                 <x-slot:slot>
-                    @if ($product->getFirstMediaUrl('image') || $product->getFirstMediaUrl('qr_code'))
-                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                            @if ($product->getFirstMediaUrl('image'))
-                                <flux:field>
-                                    <x-detail-label :label="__('صورة المنتج')" />
-                                    <div class="h-48 w-full p-1 rounded-lg border border-zinc-200 object-contain">
-                                        <img
-                                            src="{{ $product->getFirstMediaUrl('image') }}"
-                                            alt="{{ $product->code }}"
-                                            class="w-full h-full object-contain"
-                                        />
-                                    </div >
-                                </flux:field>
-                            @endif
-
-                            @if ($product->getFirstMediaUrl('qr_code'))
-                                <flux:field>
-                                    <x-detail-label :label="__('رمز QR')" />
-                                    <div class="h-48 w-full p-1 rounded-lg border border-zinc-200 object-contain">
-                                        <img
-                                            src="{{ $product->getFirstMediaUrl('qr_code') }}"
-                                            alt="{{ __('رمز QR') }}"
-                                            class="w-full h-full object-contain"
-                                        />
-                                    </div>
-                                </flux:field>
-                            @endif
-                        </div>
+                    @if ($product->getFirstMediaUrl('image'))
+                        <flux:field>
+                            <x-detail-label :label="__('صورة المنتج')" />
+                            <div class="h-48 w-full p-1 rounded-lg border border-zinc-200 object-contain">
+                                <img
+                                    src="{{ $product->getFirstMediaUrl('image') }}"
+                                    alt="{{ $product->code }}"
+                                    class="w-full h-full object-contain"
+                                />
+                            </div>
+                        </flux:field>
                     @else
                         <x-empty-state
                             :text="__('لا توجد صور لهذا المنتج.')"

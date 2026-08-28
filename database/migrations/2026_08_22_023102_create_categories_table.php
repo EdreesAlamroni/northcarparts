@@ -18,8 +18,6 @@ return new class extends Migration
             $table->unsignedInteger('sort_order')->default(0);
             $table->string('state');
             $table->timestamps();
-
-            $table->index(['state', 'sort_order']);
         });
     }
 

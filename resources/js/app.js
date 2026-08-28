@@ -1,6 +1,5 @@
 import './navigate-form';
 import './grouped-roles-fieldset';
-import './grouped-specifications-fieldset';
 import './flash-toast';
 import './charts';
 

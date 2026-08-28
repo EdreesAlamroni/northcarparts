@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 /**
  * @property int $id
@@ -17,7 +17,6 @@ use Illuminate\Support\Carbon;
  * @property string $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read EloquentCollection<int, SpecificationValue> $values
  * @property-read EloquentCollection<int, Product> $products
  */
 #[Guarded(['id'])]
@@ -30,27 +29,44 @@ class Specification extends Model
      * Start: Relations
      */
 
-    public function values(): HasMany
-    {
-        return $this->hasMany(SpecificationValue::class);
-    }
-
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(
-            Product::class,
-            'product_specification_value',
-            'specification_value_id',
-            'product_id'
-        )->whereIn('product_specification_value.specification_value_id', function ($query): void {
-            $query
-                ->select('id')
-                ->from('specification_values')
-                ->whereColumn('specification_values.specification_id', 'specifications.id');
-        });
+        return $this->belongsToMany(Product::class, 'product_specification')
+            ->withPivot('value');
     }
 
     /*
      * End: Relations
+     */
+
+    /*
+     * Start: Custom Functions
+     */
+
+    public static function list(?callable $callback = null, array $additionalColumns = ['id', 'name']): Collection
+    {
+        $columns = array_unique(
+            array_merge(['id', 'name'], $additionalColumns)
+        );
+
+        $query = self::query()->select($columns);
+
+        if ($callback) {
+            $callback($query);
+        }
+
+        return $query
+            ->orderBy('name')
+            ->pluck('name', 'id')
+            ->map(function (string $name, int $id): object {
+                return (object) [
+                    'id' => $id,
+                    'name' => $name,
+                ];
+            })->values();
+    }
+
+    /*
+     * End: Custom Functions
      */
 }

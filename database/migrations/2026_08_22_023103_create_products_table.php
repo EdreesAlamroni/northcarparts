@@ -15,8 +15,6 @@ return new class extends Migration
             $table->foreignId('oem_manufacturer_id')->nullable()->constrained('manufacturers')->nullOnDelete();
             $table->string('slug')->unique();
             $table->string('code')->unique();
-            $table->string('name')->nullable();
-            $table->string('filter_type')->index();
             $table->string('oem_number')->nullable()->index();
             $table->unsignedInteger('sort_order')->default(0)->index();
             $table->string('state');
