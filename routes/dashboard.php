@@ -27,12 +27,6 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
     // Manufacturers
     Route::prefix('manufacturers')->group(function () {
         Route::get('/', [ManufacturerController::class, 'index'])->name('manufacturers.index');
-        Route::get('/create', [ManufacturerController::class, 'create'])->name('manufacturers.create');
-        Route::post('/', [ManufacturerController::class, 'store'])->name('manufacturers.store');
-        Route::get('/{manufacturer}', [ManufacturerController::class, 'show'])->name('manufacturers.show');
-        Route::get('/{manufacturer}/edit', [ManufacturerController::class, 'edit'])->name('manufacturers.edit');
-        Route::put('/{manufacturer}', [ManufacturerController::class, 'update'])->name('manufacturers.update');
-        Route::delete('/{manufacturer}', [ManufacturerController::class, 'destroy'])->name('manufacturers.destroy');
     });
 
     // Brands

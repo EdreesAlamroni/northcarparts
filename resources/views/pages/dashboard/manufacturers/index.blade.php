@@ -17,9 +17,7 @@
         @canany(['create'], \App\Models\Manufacturer::class)
             <x-actions-section>
                 @can('create', \App\Models\Manufacturer::class)
-                    <flux:button :href="route('dashboard.manufacturers.create')" variant="primary" size="sm" icon="plus" wire:navigate>
-                        {{ __('إضافة شركة مصنعة جديدة') }}
-                    </flux:button>
+                    <livewire:pages::dashboard.manufacturers.create />
                 @endcan
             </x-actions-section>
         @endcanany
@@ -74,11 +72,24 @@
                                         <td class="font-mono">{{ $loop->iteration }}</td>
                                         <td>{{ $manufacturer->name }}</td>
                                         <td class="font-mono text-center">{{ $manufacturer->products_count }}</td>
-                                        <td class="actions">
-                                            @can('view', $manufacturer)
-                                                <x-read-more :href="route('dashboard.manufacturers.show', $manufacturer)" />
-                                            @endcan
-                                        </td>
+                                        @canany(['update', 'delete'], $manufacturer)
+                                            <td class="actions">
+                                                <div class="flex items-center justify-end gap-x-3">
+                                                    @can('update', $manufacturer)
+                                                        <livewire:pages::dashboard.manufacturers.update
+                                                            :manufacturer="$manufacturer"
+                                                            :wire:key="'manufacturer-update-'.$manufacturer->id"
+                                                        />
+                                                    @endcan
+                                                    @can('delete', $manufacturer)
+                                                        <livewire:pages::dashboard.manufacturers.delete
+                                                            :manufacturer="$manufacturer"
+                                                            :wire:key="'manufacturer-delete-'.$manufacturer->id"
+                                                        />
+                                                    @endcan
+                                                </div>
+                                            </td>
+                                        @endcanany
                                     </tr>
                                 @endforeach
                             </tbody>

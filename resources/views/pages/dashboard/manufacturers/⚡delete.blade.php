@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Specification;
+use App\Models\Manufacturer;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
@@ -8,21 +8,21 @@ use Livewire\Component;
 new class extends Component
 {
     #[Locked]
-    public Specification $specification;
+    public Manufacturer $manufacturer;
 
     public function delete(): void
     {
-        Gate::authorize('delete', $this->specification);
+        Gate::authorize('delete', $this->manufacturer);
 
-        $this->specification->delete();
+        $this->manufacturer->delete();
 
         toast_success('delete');
 
-        $this->redirect(route('dashboard.specifications.index', request()->query()), navigate: true);
+        $this->redirect(route('dashboard.manufacturers.index', request()->query()), navigate: true);
     }
 }; ?>
 
-@php($modal = 'delete-specification-'.$specification->id)
+@php($modal = 'delete-manufacturer-'.$manufacturer->id)
 
 <div>
     <flux:modal.trigger name="{{ $modal }}">
@@ -34,8 +34,8 @@ new class extends Component
             <div>
                 <flux:heading size="lg">{{ __('هل أنت متأكد من الحذف ؟') }}</flux:heading>
                 <flux:text class="mt-2 text-sm">
-                    {{ __('سيتم حذف الخاصية') }}
-                    <span class="font-semibold">{{ $specification->name }}</span>.
+                    {{ __('سيتم حذف الشركة المصنعة') }}
+                    <span class="font-semibold">{{ $manufacturer->name }}</span>.
                     {{ __('لن تتمكن من التراجع عن هذا الإجراء.') }}
                 </flux:text>
             </div>
