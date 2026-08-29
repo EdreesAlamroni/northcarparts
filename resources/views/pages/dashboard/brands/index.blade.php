@@ -17,9 +17,7 @@
         @canany(['create'], \App\Models\Brand::class)
             <x-actions-section>
                 @can('create', \App\Models\Brand::class)
-                    <flux:button :href="route('dashboard.brands.create')" variant="primary" size="sm" icon="plus" wire:navigate>
-                        {{ __('إضافة علامة تجارية جديدة') }}
-                    </flux:button>
+                    <livewire:pages::dashboard.brands.create />
                 @endcan
             </x-actions-section>
         @endcanany
@@ -74,11 +72,24 @@
                                         <td class="font-mono">{{ $loop->iteration }}</td>
                                         <td class="font-mono">{{ $brand->name }}</td>
                                         <td class="font-mono text-center">{{ $brand->products_count }}</td>
-                                        <td class="actions">
-                                            @can('view', $brand)
-                                                <x-read-more :href="route('dashboard.brands.show', $brand)" />
-                                            @endcan
-                                        </td>
+                                        @canany(['update', 'delete'], $brand)
+                                            <td class="actions">
+                                                <div class="flex items-center justify-end gap-x-3">
+                                                    @can('update', $brand)
+                                                        <livewire:pages::dashboard.brands.update
+                                                            :brand="$brand"
+                                                            :wire:key="'brand-update-'.$brand->id"
+                                                        />
+                                                    @endcan
+                                                    @can('delete', $brand)
+                                                        <livewire:pages::dashboard.brands.delete
+                                                            :brand="$brand"
+                                                            :wire:key="'brand-delete-'.$brand->id"
+                                                        />
+                                                    @endcan
+                                                </div>
+                                            </td>
+                                        @endcanany
                                     </tr>
                                 @endforeach
                             </tbody>
