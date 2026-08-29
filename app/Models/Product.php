@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -34,6 +35,8 @@ use Spatie\ModelStates\HasStates;
  * @property-read Category $category
  * @property-read Manufacturer|null $manufacturer
  * @property-read EloquentCollection<int, Specification> $specifications
+ * @property-read EloquentCollection<int, ProductCrossReference> $crossReferences
+ * @property-read EloquentCollection<int, Brand> $brands
  */
 #[Guarded(['id'])]
 class Product extends Model implements HasMedia
@@ -81,6 +84,17 @@ class Product extends Model implements HasMedia
     {
         return $this->belongsToMany(Specification::class, 'product_specification')
             ->withPivot('value');
+    }
+
+    public function crossReferences(): HasMany
+    {
+        return $this->hasMany(ProductCrossReference::class);
+    }
+
+    public function brands(): BelongsToMany
+    {
+        return $this->belongsToMany(Brand::class, 'product_cross_references')
+            ->withPivot(['reference_code', 'reference_code_normalized']);
     }
 
     /*

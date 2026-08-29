@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Actions\Product\CreateProduct;
+use App\Actions\Product\UpdateProduct;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\StoreProductRequest;
 use App\Http\Requests\Dashboard\UpdateProductRequest;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Product;
@@ -12,8 +15,8 @@ use App\Models\Specification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
@@ -28,13 +31,14 @@ class ProductController extends Controller
                 'uuid',
                 'category_id',
                 'code',
+                'oem_number',
                 'state',
                 'created_at',
             ])
             ->with(['category:id,name'])
             ->allowedFilters(
                 'code',
-                'slug',
+                AllowedFilter::exact('category_id'),
             )
             ->latest()
             ->paginate()
@@ -43,6 +47,7 @@ class ProductController extends Controller
 
         return view('pages.dashboard.products.index', [
             'products' => $products,
+            'categories' => Category::list(),
         ]);
     }
 
@@ -53,6 +58,7 @@ class ProductController extends Controller
         return view('pages.dashboard.products.create', [
             'categories' => Category::list(),
             'manufacturers' => Manufacturer::list(),
+            'brands' => Brand::list(),
             'states' => Product::getStateOptions(),
             'specifications' => Specification::list(),
         ]);
@@ -62,23 +68,12 @@ class ProductController extends Controller
     {
         Gate::authorize('create', Product::class);
 
-        $product = DB::transaction(function () use ($request) {
-            $validatedData = $request->safe()->except([
-                'image',
-                'specifications',
-            ]);
-
-            /** @var Product $product */
-            $product = Product::create($validatedData);
-
-            if ($request->hasFile('image')) {
-                $product->addMediaFromRequest('image')->toMediaCollection('image');
-            }
-
-            $this->syncSpecifications($product, $request->validated('specifications') ?? []);
-
-            return $product;
-        });
+        $product = app(CreateProduct::class)->execute(
+            $request->getAttributes(),
+            $request->validated('specifications', []),
+            $request->validated('cross_references', []),
+            $request->file('image'),
+        );
 
         toast_success('create');
 
@@ -90,14 +85,19 @@ class ProductController extends Controller
         Gate::authorize('view', $product);
 
         $product->load([
-            'category:id,name',
-            'manufacturer:id,name',
-            'specifications:id,name',
+            'category',
+            'manufacturer',
+            'specifications',
+            'crossReferences',
+            'crossReferences.brand',
         ]);
 
         return view('pages.dashboard.products.show', [
             'product' => $product,
             'specifications' => $product->specifications->sortBy('name')->values(),
+            'crossReferences' => $product->crossReferences
+                ->sortBy('brand.name')
+                ->values(),
         ]);
     }
 
@@ -105,16 +105,22 @@ class ProductController extends Controller
     {
         Gate::authorize('update', $product);
 
-        $product->load(['specifications:id,name']);
+        $product->load([
+            'specifications',
+            'crossReferences',
+        ]);
+
+        $specificationValues = $product->specifications->pluck('pivot.value', 'id')->all();
+        $crossReferenceValues = $product->crossReferences->pluck('reference_code', 'brand_id')->all();
 
         return view('pages.dashboard.products.edit', [
             'product' => $product,
             'categories' => Category::list(),
             'manufacturers' => Manufacturer::list(),
+            'brands' => Brand::list(),
             'specifications' => Specification::list(),
-            'specificationValues' => $product->specifications
-                ->pluck('pivot.value', 'id')
-                ->all(),
+            'specificationValues' => $specificationValues,
+            'crossReferenceValues' => $crossReferenceValues,
         ]);
     }
 
@@ -122,17 +128,12 @@ class ProductController extends Controller
     {
         Gate::authorize('update', $product);
 
-        $product = DB::transaction(function () use ($request, $product) {
-            $validatedData = $request->safe()->except([
-                'specifications',
-            ]);
-
-            $product->update($validatedData);
-
-            $this->syncSpecifications($product, $request->validated('specifications') ?? []);
-
-            return $product->refresh();
-        });
+        $product = app(UpdateProduct::class)->execute(
+            $product,
+            $request->getAttributes(),
+            $request->validated('specifications', []),
+            $request->validated('cross_references', []),
+        );
 
         toast_success('update');
 
@@ -148,17 +149,5 @@ class ProductController extends Controller
         toast_success('delete');
 
         return to_route('dashboard.products.index');
-    }
-
-    private function syncSpecifications(Product $product, array $specifications): void
-    {
-        $syncData = collect($specifications)
-            ->filter(fn (?string $value): bool => filled($value))
-            ->mapWithKeys(fn (string $value, int|string $id): array => [
-                (int) $id => ['value' => trim($value)],
-            ])
-            ->all();
-
-        $product->specifications()->sync($syncData);
     }
 }

@@ -27,7 +27,9 @@ trait ValidatesProductSpecifications
         $validator->after(function (Validator $validator): void {
             $specificationIds = collect($this->input('specifications', []))
                 ->keys()
-                ->map(fn (mixed $id): int => (int) $id)
+                ->map(function (mixed $id): int {
+                    return (int) $id;
+                })
                 ->filter()
                 ->values();
 

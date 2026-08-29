@@ -67,6 +67,17 @@
                         </flux:sidebar.item>
                     @endcanany
 
+                    @canany(['viewAny'], \App\Models\Brand::class)
+                        <flux:sidebar.item
+                            icon="bookmark"
+                            :href="route('dashboard.brands.index')"
+                            :current="request()->routeIs('dashboard.brands.*')"
+                            wire:navigate
+                        >
+                            {{ __('العلامات التجارية') }}
+                        </flux:sidebar.item>
+                    @endcanany
+
                     @canany(['viewAny'], \App\Models\Specification::class)
                         <flux:sidebar.item
                             icon="clipboard-document-list"

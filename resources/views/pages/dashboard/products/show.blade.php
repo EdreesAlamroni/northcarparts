@@ -97,6 +97,19 @@
             <x-card>
                 <x-slot:heading>
                     <x-slot:title>
+                        <flux:icon name="bookmark-square" class="w-4 h-4 shrink-0" />
+                        <flux:heading>{{ __('المراجع الخارجية') }}</flux:heading>
+                    </x-slot:title>
+                </x-slot:heading>
+
+                <x-slot:slot class="overflow-x-auto">
+                    <x-product-cross-references-show :cross-references="$crossReferences" />
+                </x-slot:slot>
+            </x-card>
+
+            <x-card>
+                <x-slot:heading>
+                    <x-slot:title>
                         <flux:icon name="photo" class="w-4 h-4 shrink-0" />
                         <flux:heading>{{ __('الصور') }}</flux:heading>
                     </x-slot:title>

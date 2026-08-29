@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Website\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('website.')->group(function () {

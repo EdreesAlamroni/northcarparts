@@ -3,10 +3,12 @@
 namespace App\Http\Requests\Dashboard;
 
 use App\Http\Requests\Dashboard\Concerns\ValidatesProductSpecifications;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 
 class UpdateProductRequest extends FormRequest
@@ -49,7 +51,24 @@ class UpdateProductRequest extends FormRequest
                 'string',
                 'max:255',
             ],
+            'cross_references' => [
+                Rule::array(Brand::query()->pluck('id')),
+            ],
+            'cross_references.*' => [
+                'nullable',
+                'string',
+                'max:255',
+                'regex:/[A-Z0-9]/i',
+            ],
             ...$this->specificationRules(),
         ];
+    }
+
+    public function getAttributes(): array
+    {
+        return Arr::except($this->validated(), [
+            'specifications',
+            'cross_references',
+        ]);
     }
 }

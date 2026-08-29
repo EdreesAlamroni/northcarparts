@@ -39,6 +39,14 @@
 
                     <x-slot:slot>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <flux:select name="filter[category_id]" :placeholder="__('التصنيف')">
+                                @foreach ($categories as $category)
+                                    <flux:select.option :value="$category->id" :selected="(int) request()->input('filter.category_id') === $category->id">
+                                        {{ $category->name }}
+                                    </flux:select.option>
+                                @endforeach
+                            </flux:select>
+
                             <flux:input type="text" name="filter[code]" :value="request()->input('filter.code')" autocomplete="off" lang="en" :placeholder="__('كود الفلتر')" />
                         </div>
                     </x-slot:slot>
@@ -65,6 +73,7 @@
                             <thead>
                                 <th scope="col">#</th>
                                 <th scope="col">{{ __('كود الفلتر') }}</th>
+                                <th scope="col">{{ __('رقم OEM') }}</th>
                                 <th scope="col">{{ __('التصنيف') }}</th>
                                 <th scope="col">{{ __('الحالة') }}</th>
                                 <th scope="col"></th>
@@ -74,6 +83,9 @@
                                     <tr>
                                         <td class="font-mono">{{ $loop->iteration }}</td>
                                         <td class="font-mono">{{ $product->code }}</td>
+                                        <td class="font-mono">
+                                            <x-table-nullable-cell :value="$product->oem_number" />
+                                        </td>
                                         <td>
                                             <x-table-nullable-cell :value="$product->category?->name" />
                                         </td>

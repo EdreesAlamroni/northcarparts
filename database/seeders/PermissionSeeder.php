@@ -15,6 +15,7 @@ class PermissionSeeder extends Seeder
 
         $this->seedDomain('user');
         $this->seedDomain('manufacturer');
+        $this->seedDomain('brand');
         $this->seedDomain('category');
         $this->seedDomain('product');
         $this->seedDomain('specification');

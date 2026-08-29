@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Product;
 use App\Models\Specification;
 use App\ModelStates\Product\States\Visible;
+use App\Support\PartNumberNormalizer;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -61,6 +63,7 @@ class ProductSeeder extends Seeder
 
         $categories = Category::query()->pluck('id', 'slug');
         $manufacturers = Manufacturer::query()->pluck('id', 'name');
+        $brands = Brand::query()->pluck('id', 'name');
 
         $height = Specification::query()->where('name', '=', 'Height')->firstOrFail();
         $diameter = Specification::query()->where('name', '=', 'Diameter')->firstOrFail();
@@ -112,6 +115,55 @@ class ProductSeeder extends Seeder
             };
 
             $createdProduct->specifications()->sync($specifications);
+
+            $crossReferences = match ($product['code']) {
+                'NCP-101' => [
+                    'MANN' => 'W 920/21',
+                    'MULLER' => 'FO3142',
+                    'BOSCH' => '0451103316',
+                ],
+                'NCP-102' => [
+                    'WIX' => 'WL7067',
+                    'FRAM' => 'PH4967',
+                    'UFI' => '23.120.00',
+                ],
+                'NCP-201' => [
+                    'MANN' => 'C 25 115',
+                    'MAHLE' => 'LX 3483',
+                    'PURFLUX' => 'A1318',
+                ],
+                'NCP-301' => [
+                    'MULLER' => 'FC3142',
+                    'TECNECO' => 'CK3142',
+                    'UFI' => '53.235.00',
+                ],
+                'NCP-401' => [
+                    'BOSCH' => 'N2033',
+                    'WIX' => 'WF8048',
+                ],
+                'NCP-402' => [
+                    'MANN' => 'WK 8019',
+                    'FRAM' => 'PS10409',
+                ],
+                default => [],
+            };
+
+            $syncCrossReferences = collect($crossReferences)
+                ->filter(function (string $referenceCode, string $brandName) use ($brands): bool {
+                    return isset($brands[$brandName]);
+                })
+                ->mapWithKeys(function (string $referenceCode, string $brandName) use ($brands): array {
+                    return [
+                        $brands[$brandName] => [
+                            'reference_code' => $referenceCode,
+                            'reference_code_normalized' => PartNumberNormalizer::normalize($referenceCode),
+                        ],
+                    ];
+                })
+                ->all();
+
+
+            $createdProduct->brands()->sync($syncCrossReferences);
         }
     }
 }

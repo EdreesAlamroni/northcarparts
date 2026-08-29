@@ -87,6 +87,10 @@
                         <flux:separator />
 
                         <x-product-specifications-fieldset :specifications="$specifications" />
+
+                        <flux:separator />
+
+                        <x-product-cross-references-fieldset :brands="$brands" />
                     </x-slot:slot>
 
                     <x-slot:footer class="flex items-center justify-end gap-x-3">
