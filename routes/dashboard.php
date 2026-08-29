@@ -71,8 +71,6 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
     // Specifications
     Route::prefix('specifications')->group(function () {
         Route::get('/', [SpecificationController::class, 'index'])->name('specifications.index');
-        Route::get('/{specification}', [SpecificationController::class, 'show'])->name('specifications.show');
-        Route::delete('/{specification}', [SpecificationController::class, 'destroy'])->name('specifications.destroy');
     });
 
     // News

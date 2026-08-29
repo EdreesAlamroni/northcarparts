@@ -22,7 +22,7 @@
                 @endcan
 
                 @can('delete', $specification)
-                    <x-confirm-delete :action="route('dashboard.specifications.destroy', $specification)" :title="__('حذف الخاصية')" />
+                    <livewire:pages::dashboard.specifications.delete :specification="$specification" />
                 @endcan
             </x-actions-section>
         @endcanany

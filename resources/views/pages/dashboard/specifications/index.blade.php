@@ -72,11 +72,25 @@
                                         <td class="font-mono">{{ $loop->iteration }}</td>
                                         <td>{{ $specification->name }}</td>
                                         <td class="font-mono text-center">{{ $specification->products_count }}</td>
-                                        <td class="actions">
-                                            @can('view', $specification)
-                                                <x-read-more :href="route('dashboard.specifications.show', $specification)" />
-                                            @endcan
-                                        </td>
+                                        @canany(['update', 'delete'], $specification)
+                                            <td class="actions">
+                                                <div class="flex items-center justify-end gap-x-3">
+                                                    @can('update', $specification)
+                                                        <livewire:pages::dashboard.specifications.update
+                                                            :specification="$specification"
+                                                            :wire:key="'specification-update-'.$specification->id"
+                                                        />
+                                                    @endcan
+                                                    @can('delete', $specification)
+                                                        <livewire:pages::dashboard.specifications.delete
+                                                            :specification="$specification"
+                                                            :compact="true"
+                                                            :wire:key="'specification-delete-'.$specification->id"
+                                                        />
+                                                    @endcan
+                                                </div>
+                                            </td>
+                                        @endcanany
                                     </tr>
                                 @endforeach
                             </tbody>

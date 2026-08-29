@@ -37,18 +37,18 @@ new class extends Component
 
         toast_success('update');
 
-        $this->redirect(route('dashboard.specifications.show', $this->specification), navigate: true);
+        $this->redirect(url()->previous() ?? route('dashboard.specifications.index'), navigate: true);
     }
 }; ?>
 
+@php($modal = 'update-specification-'.$specification->id)
+
 <div>
-    <flux:modal.trigger name="update">
-        <flux:button type="button" size="sm" icon="pencil-square" iconVariant="outline">
-            {{ __('تعديل بيانات الخاصية') }}
-        </flux:button>
+    <flux:modal.trigger name="{{ $modal }}">
+        <flux:button type="button" size="sm" icon="pencil-square" iconVariant="outline" />
     </flux:modal.trigger>
 
-    <flux:modal name="update" class="md:w-lg w-sm">
+    <flux:modal name="{{ $modal }}" class="md:w-lg w-sm text-start">
         <form wire:submit="submit" class="space-y-6">
             <div>
                 <flux:heading size="base">{{ __('تعديل بيانات الخاصية') }}</flux:heading>
@@ -57,8 +57,8 @@ new class extends Component
 
             <div class="space-y-6">
                 <flux:field>
-                    <flux:label @class(['text-red-600' => $errors->has('name')]) for="name" badge="*" required>{{ __('اسم الخاصية') }}</flux:label>
-                    <flux:input type="text" id="name" wire:model="name" autocomplete="off" required />
+                    <flux:label @class(['text-red-600' => $errors->has('name')]) for="name-{{ $specification->id }}" badge="*" required>{{ __('اسم الخاصية') }}</flux:label>
+                    <flux:input type="text" id="name-{{ $specification->id }}" wire:model="name" autocomplete="off" required />
                     <flux:error name="name" />
                 </flux:field>
             </div>
