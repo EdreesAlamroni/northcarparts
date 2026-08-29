@@ -162,7 +162,6 @@ class ProductSeeder extends Seeder
                 })
                 ->all();
 
-
             $createdProduct->brands()->sync($syncCrossReferences);
         }
     }
