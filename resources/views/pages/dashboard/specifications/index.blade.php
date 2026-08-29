@@ -84,7 +84,6 @@
                                                     @can('delete', $specification)
                                                         <livewire:pages::dashboard.specifications.delete
                                                             :specification="$specification"
-                                                            :compact="true"
                                                             :wire:key="'specification-delete-'.$specification->id"
                                                         />
                                                     @endcan

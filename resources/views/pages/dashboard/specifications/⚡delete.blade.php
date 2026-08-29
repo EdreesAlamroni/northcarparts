@@ -10,8 +10,6 @@ new class extends Component
     #[Locked]
     public Specification $specification;
 
-    public bool $compact = false;
-
     public function delete(): void
     {
         Gate::authorize('delete', $this->specification);
@@ -28,13 +26,7 @@ new class extends Component
 
 <div>
     <flux:modal.trigger name="{{ $modal }}">
-        @if ($compact)
-            <flux:button type="button" variant="danger" size="sm" icon="trash" iconVariant="outline" class="[&:focus]:!ring-red-500" />
-        @else
-            <flux:button type="button" variant="danger" size="sm" icon="trash" class="[&:focus]:!ring-red-500">
-                {{ __('حذف الخاصية') }}
-            </flux:button>
-        @endif
+        <flux:button type="button" variant="danger" size="sm" icon="trash" iconVariant="outline" class="[&:focus]:!ring-red-500" />
     </flux:modal.trigger>
 
     <flux:modal name="{{ $modal }}" class="sm:min-w-lg min-w-sm text-start">
