@@ -50,18 +50,6 @@
                                 <flux:input type="date" id="published_at" name="published_at" :value="old('published_at', now()->toDateString())" class="font-mono" />
                                 <flux:error name="published_at" />
                             </flux:field>
-
-                            <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('state')]) for="state" badge="*" required>{{ __('الحالة') }}</flux:label>
-                                <flux:select name="state" id="state">
-                                    @foreach ($states as $state)
-                                        <flux:select.option :value="$state->id" :selected="old('state') === $state->id">
-                                            {{ $state->action ?? $state->name }}
-                                        </flux:select.option>
-                                    @endforeach
-                                </flux:select>
-                                <flux:error name="state" />
-                            </flux:field>
                         </div>
 
                         <div class="grid grid-cols-1 gap-6">
@@ -73,7 +61,11 @@
 
                             <flux:field>
                                 <flux:label @class(['text-red-600' => $errors->has('image')]) for="image">{{ __('الصورة') }}</flux:label>
-                                <flux:input type="file" id="image" name="image" class="p-1 border border-zinc-200 rounded-lg" size="sm" accept="image/jpeg,image/png,image/webp" />
+                                <x-filepond
+                                    id="image"
+                                    name="image"
+                                    :accept="allowedImageMimetypes()->implode(', ')"
+                                />
                                 <flux:error name="image" />
                             </flux:field>
                         </div>

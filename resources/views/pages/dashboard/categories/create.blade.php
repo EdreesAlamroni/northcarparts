@@ -50,13 +50,18 @@
                                 <flux:input type="number" id="sort_order" name="sort_order" class="font-mono" :value="old('sort_order')" min="1" step="1" lang="en" required />
                                 <flux:error name="sort_order" />
                             </flux:field>
-
-                            <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('image')]) for="image">{{ __('الصورة') }}</flux:label>
-                                <flux:input type="file" id="image" name="image" class="p-1 border border-zinc-200 rounded-lg" size="sm" accept="image/jpeg,image/png,image/webp" />
-                                <flux:error name="image" />
-                            </flux:field>
                         </div>
+
+                        <flux:field>
+                            <flux:label @class(['text-red-600' => $errors->has('image')]) for="image">{{ __('الصورة') }}</flux:label>
+                            <x-filepond
+                                id="image"
+                                name="image"
+                                class="w-full"
+                                :accept="allowedImageMimetypes()->implode(', ')"
+                            />
+                            <flux:error name="image" />
+                        </flux:field>
 
                         <div class="grid grid-cols-1 gap-6">
                             <flux:field>

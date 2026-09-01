@@ -81,7 +81,13 @@ new class extends Component
             <div class="space-y-6">
                 <flux:field>
                     <flux:label @class(['text-red-600' => $errors->has('image')]) for="image" badge="*" required>{{ __('الصورة') }}</flux:label>
-                    <flux:input type="file" id="image" wire:model="image" wire:key="category-image-{{ $imageFieldKey }}" class="p-1 border border-zinc-200 rounded-lg" size="sm" accept="image/jpeg,image/png,image/webp" required />
+                    <x-filepond-livewire
+                        id="image"
+                        name="image"
+                        wire:key="category-image-{{ $imageFieldKey }}"
+                        :accept="allowedImageMimetypes()->implode(', ')"
+                        required
+                    />
                     <flux:error name="image" />
                 </flux:field>
             </div>

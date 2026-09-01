@@ -52,21 +52,6 @@
                                 <flux:input type="number" id="sort_order" name="sort_order" :value="old('sort_order', $category->sort_order)" min="0" required />
                                 <flux:error name="sort_order" />
                             </flux:field>
-
-                            <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('state')]) for="state" badge="*" required>{{ __('الحالة') }}</flux:label>
-                                <flux:select name="state" id="state">
-                                    @foreach ($states as $state)
-                                        <flux:select.option
-                                            :value="$state->id"
-                                            :selected="old('state', $category->state->value()) === $state->id"
-                                        >
-                                            {{ $state->action ?? $state->name }}
-                                        </flux:select.option>
-                                    @endforeach
-                                </flux:select>
-                                <flux:error name="state" />
-                            </flux:field>
                         </div>
 
                         <div class="grid grid-cols-1 gap-6">

@@ -3,10 +3,8 @@
 namespace App\Http\Requests\Dashboard;
 
 use App\Models\Category;
-use App\ModelStates\Category\CategoryState;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Spatie\ModelStates\Validation\ValidStateRule;
 
 class UpdateCategoryRequest extends FormRequest
 {
@@ -44,9 +42,6 @@ class UpdateCategoryRequest extends FormRequest
                 'required',
                 'integer',
                 'min:0',
-            ],
-            'state' => [
-                new ValidStateRule(CategoryState::class),
             ],
         ];
     }

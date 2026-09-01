@@ -52,18 +52,6 @@
                                 <flux:input type="date" id="published_at" name="published_at" class="font-mono" :value="old('published_at', $news->published_at?->format('Y-m-d'))" />
                                 <flux:error name="published_at" />
                             </flux:field>
-
-                            <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('state')]) for="state" badge="*" required>{{ __('الحالة') }}</flux:label>
-                                <flux:select name="state" id="state">
-                                    @foreach ($states as $state)
-                                        <flux:select.option :value="$state->id" :selected="old('state', $news->state->value()) === $state->id">
-                                            {{ $state->action ?? $state->name }}
-                                        </flux:select.option>
-                                    @endforeach
-                                </flux:select>
-                                <flux:error name="state" />
-                            </flux:field>
                         </div>
 
                         <div class="grid grid-cols-1 gap-6">

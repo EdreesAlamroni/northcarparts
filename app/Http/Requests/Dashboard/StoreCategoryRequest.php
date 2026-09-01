@@ -4,10 +4,8 @@ namespace App\Http\Requests\Dashboard;
 
 use App\Concerns\ImageValidationRules;
 use App\Models\Category;
-use App\ModelStates\Category\CategoryState;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Spatie\ModelStates\Validation\ValidStateRule;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -44,9 +42,6 @@ class StoreCategoryRequest extends FormRequest
                 'required',
                 'integer',
                 'min:1',
-            ],
-            'state' => [
-                new ValidStateRule(CategoryState::class),
             ],
             'image' => $this->imageRules(),
         ];
