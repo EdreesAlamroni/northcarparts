@@ -60,13 +60,23 @@
                         <div class="grid grid-cols-1 gap-6">
                             <flux:field>
                                 <flux:label @class(['text-red-600' => $errors->has('description')]) for="description">{{ __('الوصف') }}</flux:label>
-                                <flux:textarea id="description" name="description" rows="5">{{ old('description') }}</flux:textarea>
+                                <x-quill
+                                    id="description"
+                                    name="description"
+                                    :value="old('description')"
+                                    :invalid="$errors->has('description')"
+                                />
                                 <flux:error name="description" />
                             </flux:field>
 
                             <flux:field>
                                 <flux:label @class(['text-red-600' => $errors->has('technical_description')]) for="technical_description">{{ __('الوصف التقني') }}</flux:label>
-                                <flux:textarea id="technical_description" name="technical_description" rows="5">{{ old('technical_description') }}</flux:textarea>
+                                <x-quill
+                                    id="technical_description"
+                                    name="technical_description"
+                                    :value="old('technical_description')"
+                                    :invalid="$errors->has('technical_description')"
+                                />
                                 <flux:error name="technical_description" />
                             </flux:field>
                         </div>

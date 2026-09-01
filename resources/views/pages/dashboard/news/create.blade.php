@@ -55,7 +55,14 @@
                         <div class="grid grid-cols-1 gap-6">
                             <flux:field>
                                 <flux:label @class(['text-red-600' => $errors->has('content')]) for="content" badge="*" required>{{ __('المحتوى') }}</flux:label>
-                                <flux:textarea id="content" name="content" rows="10" required>{{ old('content') }}</flux:textarea>
+                                <x-quill
+                                    id="content"
+                                    name="content"
+                                    :value="old('content')"
+                                    :invalid="$errors->has('content')"
+                                    rows="10"
+                                    required
+                                />
                                 <flux:error name="content" />
                             </flux:field>
 

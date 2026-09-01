@@ -67,12 +67,12 @@
                     <div class="grid grid-cols-1 gap-6">
                         <flux:field>
                             <x-detail-label :label="__('الوصف')" />
-                            <x-detail-value :value="$category->description" />
+                            <x-detail-value :value="$category->description" html />
                         </flux:field>
 
                         <flux:field>
                             <x-detail-label :label="__('الوصف التقني')" />
-                            <x-detail-value :value="$category->technical_description" />
+                            <x-detail-value :value="$category->technical_description" html />
                         </flux:field>
                     </div>
 

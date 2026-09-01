@@ -67,7 +67,7 @@
                     <div class="grid grid-cols-1 gap-6">
                         <flux:field>
                             <x-detail-label :label="__('المحتوى')" />
-                            <x-detail-value :value="$news->content" />
+                            <x-detail-value :value="$news->content" html />
                         </flux:field>
 
                         @if ($news->getFirstMediaUrl('image'))
