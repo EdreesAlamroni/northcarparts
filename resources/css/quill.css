@@ -1,0 +1,204 @@
+@import "quill/dist/quill.snow.css";
+
+/* Wrapper
+   ------- */
+.quill-wrapper {
+    @apply rounded-lg border border-zinc-200 bg-white font-sans shadow-xs transition-colors;
+}
+
+.quill-wrapper:focus-within {
+    @apply border-zinc-300 ring-2 ring-zinc-900/5;
+}
+
+.quill-wrapper--invalid {
+    @apply border-red-500 ring-2 ring-red-500/20;
+}
+
+.quill-wrapper--invalid:focus-within {
+    @apply border-red-500 ring-red-500/20;
+}
+
+.quill-wrapper--disabled {
+    @apply cursor-not-allowed bg-zinc-50 opacity-75;
+}
+
+/* Toolbar
+   ------- */
+.ql-toolbar.ql-snow .ql-formats {
+    @apply ms-0 me-3;
+}
+
+.quill-wrapper .ql-toolbar.ql-snow {
+    @apply rounded-t-lg border-0 border-b border-zinc-200 bg-zinc-50 px-3 py-2 font-sans;
+}
+
+.quill-wrapper .ql-toolbar.ql-snow button {
+    @apply rounded-md text-zinc-600 transition-colors;
+}
+
+.quill-wrapper .ql-toolbar.ql-snow button:hover,
+.quill-wrapper .ql-toolbar.ql-snow button.ql-active {
+    @apply text-zinc-900;
+}
+
+.quill-wrapper .ql-toolbar.ql-snow .ql-picker-label {
+    @apply rounded-md text-zinc-600 ps-6 pe-0;
+}
+
+.quill-wrapper .ql-toolbar.ql-snow .ql-align .ql-picker-label {
+    @apply rounded-md text-zinc-600 pe-[6px] ps-[2px];
+}
+
+/* Editor
+   ------ */
+.quill-wrapper .ql-container.ql-snow {
+    @apply border-0 font-sans text-sm;
+}
+
+.quill-wrapper .ql-editor {
+    @apply min-h-[inherit] px-3 py-2 text-sm text-zinc-900;
+    direction: rtl;
+    text-align: right;
+}
+
+.quill-wrapper .ql-editor .ql-direction-rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.quill-wrapper .ql-editor .ql-direction-ltr {
+    direction: ltr;
+    text-align: left;
+}
+
+.quill-wrapper .ql-editor.ql-blank::before {
+    @apply text-zinc-400 not-italic;
+    right: 0.75rem;
+    left: 0.75rem;
+}
+
+/* Lists — use logical properties so RTL/LTR both render correctly
+   ------------------------------------------------------------- */
+.quill-wrapper .ql-editor ol,
+.quill-wrapper .ql-editor ul {
+    padding-inline-start: 1.5em;
+    padding-inline-end: 0;
+}
+
+.quill-wrapper .ql-editor li {
+    padding-inline-start: 1.5em;
+    padding-inline-end: 0;
+}
+
+.quill-wrapper .ql-editor li > .ql-ui::before {
+    margin-inline-start: -1.5em;
+    margin-inline-end: 0.3em;
+    text-align: end;
+}
+
+/* Indents — logical properties respect the editor direction
+   ------------------------------------------------------- */
+.quill-wrapper .ql-editor .ql-indent-1 {
+    padding-inline-start: 3em;
+}
+
+.quill-wrapper .ql-editor li.ql-indent-1 {
+    padding-inline-start: 4.5em;
+}
+
+.quill-wrapper .ql-editor .ql-indent-2 {
+    padding-inline-start: 6em;
+}
+
+.quill-wrapper .ql-editor li.ql-indent-2 {
+    padding-inline-start: 7.5em;
+}
+
+.quill-wrapper .ql-editor .ql-indent-3 {
+    padding-inline-start: 9em;
+}
+
+.quill-wrapper .ql-editor li.ql-indent-3 {
+    padding-inline-start: 10.5em;
+}
+
+/* Blockquote
+   --------- */
+.quill-wrapper .ql-editor blockquote {
+    @apply border-s-4 border-zinc-300 ps-4 text-zinc-600;
+    border-left: 0;
+}
+
+/* Link preview tooltip (Quill snow) — constrained & responsive
+   ---------------------------------------------------------- */
+.quill-wrapper .ql-snow .ql-tooltip {
+    @apply z-50 max-w-[min(90vw,20rem)] rounded-md border border-zinc-200 bg-white p-3 text-xs text-zinc-700 shadow-lg;
+    white-space: normal;
+    direction: rtl;
+    left: 0.5rem !important;
+    right: 0.5rem !important;
+    margin: 0 auto;
+    width: auto;
+}
+
+.quill-wrapper .ql-snow .ql-tooltip input[type=text] {
+    @apply mt-2 w-full rounded border border-zinc-300 px-2 py-1 text-xs text-zinc-900;
+    width: 100% !important;
+}
+
+.quill-wrapper .ql-snow .ql-tooltip a.ql-preview {
+    @apply max-w-full truncate text-blue-600;
+}
+
+.quill-wrapper .ql-snow .ql-tooltip a.ql-action::after {
+    @apply border-s border-zinc-300 ps-2;
+    border-right: 0;
+    margin-left: 0;
+}
+
+.quill-wrapper .ql-snow .ql-tooltip a.ql-remove::before {
+    @apply ps-2;
+    margin-left: 0;
+}
+
+/* Rendered rich text (show pages)
+   ------------------------------ */
+.rich-text-content {
+    @apply space-y-3 text-sm leading-relaxed text-zinc-900;
+}
+
+.rich-text-content h1 {
+    @apply text-2xl font-semibold;
+}
+
+.rich-text-content h2 {
+    @apply text-xl font-semibold;
+}
+
+.rich-text-content h3 {
+    @apply text-lg font-semibold;
+}
+
+.rich-text-content p {
+    @apply leading-relaxed;
+}
+
+.rich-text-content ul {
+    @apply list-disc ps-6;
+}
+
+.rich-text-content ol {
+    @apply list-decimal ps-6;
+}
+
+.rich-text-content blockquote {
+    @apply border-s-4 border-zinc-300 ps-4 text-zinc-600 italic;
+}
+
+.rich-text-content pre {
+    @apply overflow-x-auto rounded-md bg-zinc-100 p-3 font-mono text-xs;
+}
+
+.rich-text-content a {
+    @apply text-blue-600 underline;
+}

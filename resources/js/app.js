@@ -3,6 +3,7 @@ import './grouped-roles-fieldset';
 import './flash-toast';
 import './charts';
 import './filepond';
+import './quill';
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.non-wire').forEach(form => {

@@ -15,6 +15,7 @@
         "filepond-plugin-file-validate-type": "^1.2.9",
         "filepond-plugin-image-preview": "^4.6.12",
         "laravel-vite-plugin": "^3.1",
+        "quill": "^2.0.3",
         "tailwindcss": "^4.0.7",
         "vite": "^8.0.0"
     },

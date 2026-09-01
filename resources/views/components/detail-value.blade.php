@@ -1,10 +1,12 @@
 @props([
     'value' => null,
     'fallback' => '-',
+    'html' => false,
 ])
 
 @php
     $isFilled = filled($value);
+    $html = filter_var($html, FILTER_VALIDATE_BOOLEAN);
 @endphp
 
 <div {{ $attributes->class([
@@ -12,7 +14,11 @@
     'font-mono' => ! $isFilled && $fallback === '-' && $slot->isEmpty(),
 ]) }}>
     @if ($slot->isEmpty())
-        {{ $isFilled ? $value : $fallback }}
+        @if ($html && $isFilled)
+            <div class="rich-text-content">{!! $value !!}</div>
+        @else
+            {{ $isFilled ? $value : $fallback }}
+        @endif
     @else
         {!! $slot !!}
     @endif

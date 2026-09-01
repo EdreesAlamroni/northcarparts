@@ -5,6 +5,7 @@
 @import "./state.css";
 @import "./dashboard.css";
 @import "./filepond.css";
+@import "./quill.css";
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
