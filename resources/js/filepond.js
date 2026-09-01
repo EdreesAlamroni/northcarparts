@@ -12,8 +12,8 @@ FilePond.registerPlugin(
 
 FilePond.setOptions(arAR);
 
-document.addEventListener('alpine:init', () => {
-    Alpine.data('filepondInput', (config, wire = null) => ({
+export function filepondInput(config, wire = null) {
+    return {
         pond: null,
 
         init() {
@@ -82,5 +82,5 @@ document.addEventListener('alpine:init', () => {
                 this.pond = null;
             }
         },
-    }));
-});
+    };
+}

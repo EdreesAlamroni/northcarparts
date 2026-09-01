@@ -199,8 +199,8 @@ function destroyAllDashboardCharts() {
 
 document.addEventListener('livewire:navigating', destroyAllDashboardCharts);
 
-document.addEventListener('alpine:init', () => {
-    Alpine.data('dashboardChart', () => ({
+export function dashboardChart() {
+    return {
         chart: null,
         resizeObserver: null,
 
@@ -342,5 +342,5 @@ document.addEventListener('alpine:init', () => {
                 this.chart = null;
             }
         },
-    }));
-});
+    };
+}

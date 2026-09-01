@@ -1,9 +1,11 @@
 import './navigate-form';
 import './grouped-roles-fieldset';
 import './flash-toast';
-import './charts';
-import './filepond';
-import './quill';
+import { lazyAlpineData } from './lazy-alpine';
+
+lazyAlpineData('quillEditor', async () => (await import('./quill')).quillEditor);
+lazyAlpineData('filepondInput', async () => (await import('./filepond')).filepondInput);
+lazyAlpineData('dashboardChart', async () => (await import('./charts')).dashboardChart);
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.non-wire').forEach(form => {

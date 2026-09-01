@@ -24,8 +24,8 @@ const DirectionClass = new ClassAttributor('direction', 'ql-direction', {
 
 Quill.register(DirectionClass, true);
 
-document.addEventListener('alpine:init', () => {
-    Alpine.data('quillEditor', (config, wire = null) => ({
+export function quillEditor(config, wire = null) {
+    return {
         quill: null,
 
         init() {
@@ -186,5 +186,5 @@ document.addEventListener('alpine:init', () => {
             this.$refs.editor.innerHTML = '';
             this.quill = null;
         },
-    }));
-});
+    };
+}

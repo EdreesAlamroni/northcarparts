@@ -1,4 +1,8 @@
 {
+  "_rolldown-runtime-hePW80VL.js": {
+    "file": "assets/rolldown-runtime-hePW80VL.js",
+    "name": "rolldown-runtime"
+  },
   "resources/assets/fonts/SomarSans-Black.woff2": {
     "file": "assets/SomarSans-Black-QqrsSPwN.woff2",
     "src": "resources/assets/fonts/SomarSans-Black.woff2"
@@ -101,9 +105,38 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-Bu_gdEo5.js",
+    "file": "assets/app-dpKzji3g.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/quill.js",
+      "resources/js/filepond.js",
+      "resources/js/charts.js"
+    ]
+  },
+  "resources/js/charts.js": {
+    "file": "assets/charts-jD4qRwJ0.js",
+    "name": "charts",
+    "src": "resources/js/charts.js",
+    "isDynamicEntry": true
+  },
+  "resources/js/filepond.js": {
+    "file": "assets/filepond-BnB6WkHa.js",
+    "name": "filepond",
+    "src": "resources/js/filepond.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-hePW80VL.js"
+    ]
+  },
+  "resources/js/quill.js": {
+    "file": "assets/quill-YFOHFgLC.js",
+    "name": "quill",
+    "src": "resources/js/quill.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-hePW80VL.js"
+    ]
   }
 }
