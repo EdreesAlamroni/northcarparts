@@ -2,6 +2,7 @@ import './navigate-form';
 import './grouped-roles-fieldset';
 import './flash-toast';
 import './charts';
+import './filepond';
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.non-wire').forEach(form => {

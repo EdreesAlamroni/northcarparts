@@ -1,0 +1,42 @@
+@import "filepond/dist/filepond.min.css";
+@import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
+
+.filepond--root {
+    @apply font-sans mb-0 w-full;
+}
+
+.filepond--panel-root {
+    @apply text-xs border-2 border-gray-300 border-dashed rounded-md bg-zinc-50;
+}
+
+.filepond--drop-label label {
+    @apply font-medium text-sm text-gray-700;
+}
+
+.filepond--file-status {
+    @apply gap-2;
+}
+
+.filepond--file-status .filepond--file-status-main {
+    direction: rtl;
+}
+
+[data-filepond-item-state="idle"] .filepond--item-panel {
+    @apply bg-zinc-500;
+}
+
+[data-filepond-item-state="busy processing"] .filepond--item-panel {
+    @apply bg-zinc-500;
+}
+
+[data-filepond-item-state="processing"] .filepond--item-panel {
+    @apply bg-zinc-500;
+}
+
+[data-filepond-item-state="processing-complete"] .filepond--item-panel {
+    @apply bg-green-700;
+}
+
+.filepond--credits {
+    @apply hidden;
+}

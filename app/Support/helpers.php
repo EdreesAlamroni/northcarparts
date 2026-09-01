@@ -1,6 +1,7 @@
 <?php
 
 use Flux\Flux;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
 use Livewire\Component;
 use Livewire\Livewire;
@@ -53,5 +54,27 @@ if (! function_exists('toast_warning')) {
     function toast_warning(string $key, array $replacements = []): void
     {
         toast('warning', $key, $replacements);
+    }
+}
+
+if (! function_exists('allowedImageMimetypes')) {
+    /**
+     * Get the MIME types allowed for image uploads.
+     *
+     * @return Collection<int, string>
+     */
+    function allowedImageMimetypes(): Collection
+    {
+        return collect(['image/jpeg', 'image/png', 'image/webp']);
+    }
+}
+
+if (! function_exists('allowedImageMaxFileSize')) {
+    /**
+     * Get the maximum allowed image upload size for FilePond client-side validation.
+     */
+    function allowedImageMaxFileSize(): string
+    {
+        return '10MB';
     }
 }
