@@ -44,6 +44,15 @@ class Product extends Model implements HasMedia
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory, HasStates, HasUuid, InteractsWithMedia, ModelStateUtilities;
 
+    protected static function booted(): void
+    {
+        static::creating(function (Product $product): void {
+            if (blank($product->sort_order)) {
+                $product->sort_order = (static::max('sort_order') ?? 0) + 1;
+            }
+        });
+    }
+
     protected function casts(): array
     {
         return [

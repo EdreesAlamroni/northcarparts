@@ -39,6 +39,15 @@ class Category extends Model implements HasMedia
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory, HasStates, HasUuid, InteractsWithMedia, ModelStateUtilities;
 
+    protected static function booted(): void
+    {
+        static::creating(function (Category $category): void {
+            if (blank($category->sort_order)) {
+                $category->sort_order = (static::max('sort_order') ?? 0) + 1;
+            }
+        });
+    }
+
     protected function casts(): array
     {
         return [

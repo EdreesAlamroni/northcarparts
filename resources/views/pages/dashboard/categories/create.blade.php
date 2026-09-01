@@ -44,12 +44,6 @@
                                 <flux:input type="text" id="slug" name="slug" :value="old('slug')" autocomplete="off" lang="en" required />
                                 <flux:error name="slug" />
                             </flux:field>
-
-                            <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('sort_order')]) for="sort_order" badge="*" required>{{ __('ترتيب العرض') }}</flux:label>
-                                <flux:input type="number" id="sort_order" name="sort_order" class="font-mono" :value="old('sort_order')" min="1" step="1" lang="en" required />
-                                <flux:error name="sort_order" />
-                            </flux:field>
                         </div>
 
                         <flux:field>

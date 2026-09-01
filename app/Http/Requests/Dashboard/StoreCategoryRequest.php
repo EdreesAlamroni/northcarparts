@@ -38,11 +38,6 @@ class StoreCategoryRequest extends FormRequest
                 'nullable',
                 'string',
             ],
-            'sort_order' => [
-                'required',
-                'integer',
-                'min:1',
-            ],
             'image' => $this->imageRules(),
         ];
     }
