@@ -1,8 +1,8 @@
-@props([
-    'specifications' => collect(),
-    'emptyTitle' => __('لا توجد خصائص لهذا المنتج'),
-    'emptyDescription' => __('لم يتم تعيين أي خصائص لهذا المنتج بعد. يمكنك تعديل بيانات المنتج لإضافة الخصائص المناسبة.'),
-])
+@php
+    $specifications = $specifications ?? collect();
+    $emptyTitle = $emptyTitle ?? __('لا توجد خصائص لهذا المنتج');
+    $emptyDescription = $emptyDescription ?? __('لم يتم تعيين أي خصائص لهذا المنتج بعد. يمكنك تعديل بيانات المنتج لإضافة الخصائص المناسبة.');
+@endphp
 
 @if ($specifications->isNotEmpty())
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">

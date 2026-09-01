@@ -1,8 +1,8 @@
-@props([
-    'crossReferences' => collect([]),
-    'emptyTitle' => __('لا توجد مراجع خارجية لهذا المنتج'),
-    'emptyDescription' => __('لم يتم تعيين أي أرقام مرجعية خارجية لهذا المنتج بعد.'),
-])
+@php
+    $crossReferences = $crossReferences ?? collect();
+    $emptyTitle = $emptyTitle ?? __('لا توجد مراجع خارجية لهذا المنتج');
+    $emptyDescription = $emptyDescription ?? __('لم يتم تعيين أي أرقام مرجعية خارجية لهذا المنتج بعد.');
+@endphp
 
 @if ($crossReferences->isNotEmpty())
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">

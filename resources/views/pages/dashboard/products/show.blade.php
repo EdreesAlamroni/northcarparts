@@ -90,7 +90,7 @@
                 </x-slot:heading>
 
                 <x-slot:slot class="overflow-x-auto">
-                    <x-product-specifications-show :specifications="$specifications" />
+                    @include('pages.dashboard.products._specifications-show')
                 </x-slot:slot>
             </x-card>
 
@@ -103,7 +103,7 @@
                 </x-slot:heading>
 
                 <x-slot:slot class="overflow-x-auto">
-                    <x-product-cross-references-show :cross-references="$crossReferences" />
+                    @include('pages.dashboard.products._cross-references-show')
                 </x-slot:slot>
             </x-card>
 
