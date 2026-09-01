@@ -8,17 +8,20 @@ use Illuminate\Support\Facades\DB;
 
 class CreateProduct
 {
+    /**
+     * @param  array<int, UploadedFile>  $images
+     */
     public function execute(
         array $attributes,
         array $specifications,
         array $crossReferences,
-        ?UploadedFile $image = null,
+        array $images = [],
     ): Product {
-        return DB::transaction(function () use ($attributes, $specifications, $crossReferences, $image) {
+        return DB::transaction(function () use ($attributes, $specifications, $crossReferences, $images) {
             /** @var Product $product */
             $product = Product::create($attributes);
 
-            if ($image !== null) {
+            foreach ($images as $image) {
                 $product->addMedia($image)->toMediaCollection('image');
             }
 

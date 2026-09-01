@@ -76,13 +76,17 @@
                             </flux:field>
                         </div>
 
-                        <div class="grid grid-cols-1 gap-6">
-                            <flux:field>
-                                <flux:label @class(['text-red-600' => $errors->has('image')]) for="image">{{ __('الصورة') }}</flux:label>
-                                <flux:input type="file" id="image" name="image" class="p-1 border border-zinc-200 rounded-lg" size="sm" accept="image/jpeg,image/png,image/webp" />
-                                <flux:error name="image" />
-                            </flux:field>
-                        </div>
+                        <flux:field>
+                            <flux:label @class(['text-red-600' => $errors->has('images') || $errors->has('images.*')]) for="images">{{ __('الصور') }}</flux:label>
+                            <x-filepond
+                                id="images"
+                                name="images[]"
+                                :accept="allowedImageMimetypes()->implode(', ')"
+                                multiple
+                            />
+                            <flux:error name="images" />
+                            <flux:error name="images.*" />
+                        </flux:field>
 
                         <flux:separator />
 

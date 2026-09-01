@@ -78,3 +78,23 @@ if (! function_exists('allowedImageMaxFileSize')) {
         return '10MB';
     }
 }
+
+if (! function_exists('navigate_preserving_scroll')) {
+    /**
+     * Navigate to the given URL without resetting scroll position.
+     *
+     * Uses Livewire's SPA navigation when called from a Livewire component action.
+     */
+    function navigate_preserving_scroll(string $url): void
+    {
+        $component = Livewire::current();
+
+        if ($component instanceof Component) {
+            $component->js('Alpine.navigate('.json_encode($url).', { preserveScroll: true })');
+
+            return;
+        }
+
+        redirect($url);
+    }
+}

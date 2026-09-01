@@ -72,7 +72,7 @@ class ProductController extends Controller
             $request->getAttributes(),
             $request->validated('specifications', []),
             $request->validated('cross_references', []),
-            $request->file('image'),
+            array_filter($request->file('images', [])),
         );
 
         toast_success('create');

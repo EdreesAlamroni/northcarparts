@@ -59,14 +59,15 @@ class StoreProductRequest extends FormRequest
                 'regex:/[A-Z0-9]/i',
             ],
             ...$this->specificationRules(),
-            'image' => $this->imageRules(),
+            'images' => $this->imagesRules(),
+            'images.*' => $this->imageItemRules(),
         ];
     }
 
     public function getAttributes(): array
     {
         return Arr::except($this->validated(), [
-            'image',
+            'images',
             'specifications',
             'cross_references',
         ]);
