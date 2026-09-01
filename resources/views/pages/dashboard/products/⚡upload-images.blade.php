@@ -40,14 +40,14 @@ new class extends Component
 <div>
     <flux:modal.trigger name="upload-images">
         <flux:button type="button" size="sm" icon="arrow-up-tray" iconVariant="outline">
-            {{ __('رفع الصور') }}
+            {{ __('إضافة صور جديدة') }}
         </flux:button>
     </flux:modal.trigger>
 
     <flux:modal name="upload-images" class="md:w-lg w-sm">
         <form wire:submit.preserve-scroll="submit" class="space-y-6">
             <div>
-                <flux:heading size="base">{{ __('رفع الصور') }}</flux:heading>
+                <flux:heading size="base">{{ __('إضافة صور جديدة') }}</flux:heading>
                 <flux:text class="mt-2">{{ __('اختر صور المنتج الجديدة.') }}</flux:text>
             </div>
 
